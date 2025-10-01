@@ -9,33 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
   
-  <!-- إضافة Firebase SDK -->
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
-    import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDz8zQWojljzEKQr6Dd33gPa7JpqAPruyM",
-      authDomain: "love-5555.firebaseapp.com",
-      projectId: "love-5555",
-      storageBucket: "love-5555.firebasestorage.app",
-      messagingSenderId: "65220863795",
-      appId: "1:65220863795:web:23cb41d8ce7e0a3de18046",
-      measurementId: "G-KQLNS2ERQ2"
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const db = getFirestore(app);
-
-    // جعل db متاحًا بشكل عام للاستخدام في باقي الكود
-    window.firebaseApp = { db, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp };
-  </script>
-
   <style>
     :root {
       --primary-color: #e91e63;
@@ -649,13 +622,6 @@
     
     <div class="messages-list" id="messagesList">
       <!-- الرسائل ستظهر هنا -->
-      <div class="message-item message-from-abdo">
-        <div class="message-header">
-          <span class="message-sender">عبدو 💙</span>
-          <span class="message-time">جاري التحميل...</span>
-        </div>
-        <div class="message-content">جاري تحميل الرسائل...</div>
-      </div>
     </div>
   </div>
 
@@ -688,6 +654,8 @@
   </audio>
 
   <script>
+    
+
     // رسائل الحب
     const messages = [
       "منة، وجودك في حياتي هو الهدوء وسط ضجيج العالم، زي حضن أم في عز الخوف. بحبك بحجم السما وأكتر.",
@@ -755,23 +723,7 @@
       createStars();
       setupEventListeners();
       setSender('abdo');
-      
-      // الانتظار حتى يتم تحميل Firebase ثم تحميل الرسائل
-      setTimeout(() => {
-        if (window.firebaseApp) {
-          loadMessages();
-        } else {
-          console.log("بانتظار تهيئة Firebase...");
-          setTimeout(() => {
-            if (window.firebaseApp) {
-              loadMessages();
-            } else {
-              console.error("تعذر الاتصال بـ Firebase");
-              elements.messagesList.innerHTML = '<div class="message-item">تعذر تحميل الرسائل. تأكد من اتصال الإنترنت.</div>';
-            }
-          }, 2000);
-        }
-      }, 1000);
+      loadMessages();
     }
 
     // انترو البداية
@@ -991,19 +943,12 @@
         return;
       }
       
-      if (!window.firebaseApp) {
-        alert('تعذر الاتصال بالخادم. تأكد من اتصال الإنترنت.');
-        return;
-      }
-      
       try {
-        const { db, collection, addDoc, serverTimestamp } = window.firebaseApp;
-        
         // إضافة رسالة إلى قاعدة البيانات
-        await addDoc(collection(db, 'messages'), {
+        await db.collection('messages').add({
           text: messageText,
           sender: state.currentSender,
-          timestamp: serverTimestamp()
+          timestamp: firebase.firestore.FieldValue.serverTimestamp()
         });
         
         // مسح حقل النص
@@ -1019,37 +964,18 @@
     }
 
     function loadMessages() {
-      if (!window.firebaseApp) {
-        console.error("Firebase غير مهيئ بعد");
-        return;
-      }
-      
-      const { db, collection, onSnapshot, orderBy, query } = window.firebaseApp;
-      
-      try {
-        // الاستماع للتحديثات في الوقت الفعلي
-        const q = query(collection(db, 'messages'), orderBy('timestamp', 'desc'));
-        
-        onSnapshot(q, (snapshot) => {
+      // الاستماع للتحديثات في الوقت الفعلي
+      db.collection('messages')
+        .orderBy('timestamp', 'desc')
+        .limit(50)
+        .onSnapshot(snapshot => {
           elements.messagesList.innerHTML = '';
           
-          if (snapshot.empty) {
-            elements.messagesList.innerHTML = '<div class="message-item">لا توجد رسائل بعد. كن أول من يرسل رسالة! 💌</div>';
-            return;
-          }
-          
-          snapshot.forEach((doc) => {
+          snapshot.forEach(doc => {
             const message = doc.data();
             displayMessage(message);
           });
-        }, (error) => {
-          console.error("خطأ في تحميل الرسائل:", error);
-          elements.messagesList.innerHTML = '<div class="message-item">تعذر تحميل الرسائل. تأكد من اتصال الإنترنت.</div>';
         });
-      } catch (error) {
-        console.error("خطأ في إعداد استماع الرسائل:", error);
-        elements.messagesList.innerHTML = '<div class="message-item">تعذر تحميل الرسائل. تأكد من اتصال الإنترنت.</div>';
-      }
     }
 
     function displayMessage(message) {
@@ -1069,35 +995,82 @@
         <div class="message-content">${message.text}</div>
       `;
       
-      elements.messagesList.appendChild(messageDiv);
+      elements.messagesList.prepend(messageDiv);
     }
 
     // بدء التطبيق
     window.addEventListener('DOMContentLoaded', init);
   </script>
 
-  <script type="module">
-  // Import the functions you need from the SDKs you need
+<script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { getFirestore, collection, addDoc, serverTimestamp, query, orderBy, limit, onSnapshot } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
     apiKey: "AIzaSyDz8zQWojljzEKQr6Dd33gPa7JpqAPruyM",
     authDomain: "love-5555.firebaseapp.com",
     projectId: "love-5555",
     storageBucket: "love-5555.firebasestorage.app",
     messagingSenderId: "65220863795",
-    appId: "1:65220863795:web:23cb41d8ce7e0a3de18046",
-    measurementId: "G-KQLNS2ERQ2"
+    appId: "1:65220863795:web:41d642cd50117fe1e18046",
+    measurementId: "G-J2ZQE1TWSM"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  </script>
+  const db = getFirestore(app);
+
+  async function sendMessage() {
+    const messageText = document.getElementById("messageInput").value.trim();
+    if (!messageText) {
+      alert('من فضلك اكتب رسالة قبل الإرسال');
+      return;
+    }
+
+    await addDoc(collection(db, "messages"), {
+      text: messageText,
+      sender: state.currentSender,
+      timestamp: serverTimestamp()
+    });
+
+    document.getElementById("messageInput").value = "";
+    showHeartExplosion();
+  }
+
+  function loadMessages() {
+    const messagesList = document.getElementById("messagesList");
+    const q = query(collection(db, "messages"), orderBy("timestamp", "desc"), limit(50));
+
+    onSnapshot(q, (snapshot) => {
+      messagesList.innerHTML = "";
+      snapshot.forEach((doc) => {
+        const message = doc.data();
+        displayMessage(message);
+      });
+    });
+  }
+
+  function displayMessage(message) {
+    const messagesList = document.getElementById("messagesList");
+    const messageDiv = document.createElement("div");
+    messageDiv.className = `message-item ${message.sender === 'abdo' ? 'message-from-abdo' : 'message-from-menna'}`;
+
+    const senderName = message.sender === 'abdo' ? 'عبدو 💙' : 'منة 💝';
+    const timestamp = message.timestamp ? message.timestamp.toDate().toLocaleString('ar-EG') : 'الآن';
+
+    messageDiv.innerHTML = `
+      <div class="message-header">
+        <span class="message-sender">${senderName}</span>
+        <span class="message-time">${timestamp}</span>
+      </div>
+      <div class="message-content">${message.text}</div>
+    `;
+
+    messagesList.prepend(messageDiv);
+  }
+
+  window.sendMessage = sendMessage;
+  window.addEventListener("DOMContentLoaded", loadMessages);
+</script>
+
 </body>
-      </html>
+  </html>
