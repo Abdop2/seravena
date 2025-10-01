@@ -8,6 +8,34 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- إضافة Firebase SDK -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-analytics.js";
+    import { getFirestore, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDz8zQWojljzEKQr6Dd33gPa7JpqAPruyM",
+      authDomain: "love-5555.firebaseapp.com",
+      projectId: "love-5555",
+      storageBucket: "love-5555.firebasestorage.app",
+      messagingSenderId: "65220863795",
+      appId: "1:65220863795:web:23cb41d8ce7e0a3de18046",
+      measurementId: "G-KQLNS2ERQ2"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+    // جعل db متاحًا بشكل عام للاستخدام في باقي الكود
+    window.firebaseApp = { db, collection, addDoc, onSnapshot, orderBy, query, serverTimestamp };
+  </script>
+
   <style>
     :root {
       --primary-color: #e91e63;
@@ -424,6 +452,120 @@
       margin-top: 1rem;
     }
 
+    /* قسم الرسائل */
+    .messages-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      backdrop-filter: blur(5px);
+    }
+
+    .messages-section h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .message-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .message-input {
+      padding: 1rem;
+      border-radius: 10px;
+      border: none;
+      background: rgba(255, 255, 255, 0.9);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      resize: none;
+      min-height: 100px;
+      transition: var(--transition);
+    }
+
+    .message-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--primary-color);
+    }
+
+    .sender-selector {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .sender-btn {
+      flex: 1;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .sender-btn.active {
+      background: var(--primary-color);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .messages-list {
+      margin-top: 2rem;
+      max-height: 400px;
+      overflow-y: auto;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    .message-item {
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .message-sender {
+      font-weight: bold;
+    }
+
+    .message-time {
+      font-size: 0.8rem;
+    }
+
+    .message-content {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .message-from-abdo {
+      border-right: 3px solid var(--primary-color);
+    }
+
+    .message-from-menna {
+      border-right: 3px solid #4CAF50;
+    }
+
     /* تحسينات للهواتف */
     @media (max-width: 768px) {
       .container {
@@ -444,6 +586,10 @@
       .btn {
         padding: 0.5rem 1.2rem;
         font-size: 0.9rem;
+      }
+
+      .sender-selector {
+        flex-direction: column;
       }
     }
 
@@ -486,6 +632,33 @@
     </div>
   </div>
 
+  <!-- قسم إرسال واستقبال الرسائل -->
+  <div class="container messages-section">
+    <h2>💌 محادثتنا الحلوة 💌</h2>
+    
+    <div class="message-form">
+      <textarea class="message-input" id="messageInput" placeholder="اكتب رسالتك هنا..."></textarea>
+      
+      <div class="sender-selector">
+        <button class="sender-btn" id="senderAbdo" onclick="setSender('abdo')">عبدو 💙</button>
+        <button class="sender-btn" id="senderMenna" onclick="setSender('menna')">منة 💝</button>
+      </div>
+      
+      <button class="btn" onclick="sendMessage()">إرسال الرسالة 💖</button>
+    </div>
+    
+    <div class="messages-list" id="messagesList">
+      <!-- الرسائل ستظهر هنا -->
+      <div class="message-item message-from-abdo">
+        <div class="message-header">
+          <span class="message-sender">عبدو 💙</span>
+          <span class="message-time">جاري التحميل...</span>
+        </div>
+        <div class="message-content">جاري تحميل الرسائل...</div>
+      </div>
+    </div>
+  </div>
+
   <!-- تايملاين قصة الحب -->
   <div class="container timeline">
     <div class="timeline-event">
@@ -515,7 +688,7 @@
   </audio>
 
   <script>
-    // رسائل الحب (تم تقليل العدد لأغراض العرض، يمكن إضافة المزيد)
+    // رسائل الحب
     const messages = [
       "منة، وجودك في حياتي هو الهدوء وسط ضجيج العالم، زي حضن أم في عز الخوف. بحبك بحجم السما وأكتر.",
       "أنا عبدو، الطالب في مدرسة حبك، وكل يوم بتعلم فيكِ معنى جديد للحياة والحنان.",
@@ -561,14 +734,19 @@
       bgMusic: document.getElementById("bgMusic"),
       heartExplosion: document.getElementById("heartExplosion"),
       musicBtn: document.getElementById("musicBtn"),
-      stars: document.getElementById("stars")
+      stars: document.getElementById("stars"),
+      messageInput: document.getElementById("messageInput"),
+      messagesList: document.getElementById("messagesList"),
+      senderAbdo: document.getElementById("senderAbdo"),
+      senderMenna: document.getElementById("senderMenna")
     };
 
     // حالات التطبيق
     const state = {
       isNightMode: false,
       isMusicPlaying: false,
-      loveStartDate: new Date('2024-03-02')
+      loveStartDate: new Date('2024-03-02'),
+      currentSender: 'abdo'
     };
 
     // تهيئة التطبيق
@@ -576,6 +754,24 @@
       simulateLoading();
       createStars();
       setupEventListeners();
+      setSender('abdo');
+      
+      // الانتظار حتى يتم تحميل Firebase ثم تحميل الرسائل
+      setTimeout(() => {
+        if (window.firebaseApp) {
+          loadMessages();
+        } else {
+          console.log("بانتظار تهيئة Firebase...");
+          setTimeout(() => {
+            if (window.firebaseApp) {
+              loadMessages();
+            } else {
+              console.error("تعذر الاتصال بـ Firebase");
+              elements.messagesList.innerHTML = '<div class="message-item">تعذر تحميل الرسائل. تأكد من اتصال الإنترنت.</div>';
+            }
+          }, 2000);
+        }
+      }, 1000);
     }
 
     // انترو البداية
@@ -773,8 +969,111 @@
       }, 1500);
     }
 
+    // نظام الرسائل
+    function setSender(sender) {
+      state.currentSender = sender;
+      
+      // تحديث الأزرار
+      if (sender === 'abdo') {
+        elements.senderAbdo.classList.add('active');
+        elements.senderMenna.classList.remove('active');
+      } else {
+        elements.senderMenna.classList.add('active');
+        elements.senderAbdo.classList.remove('active');
+      }
+    }
+
+    async function sendMessage() {
+      const messageText = elements.messageInput.value.trim();
+      
+      if (!messageText) {
+        alert('من فضلك اكتب رسالة قبل الإرسال');
+        return;
+      }
+      
+      if (!window.firebaseApp) {
+        alert('تعذر الاتصال بالخادم. تأكد من اتصال الإنترنت.');
+        return;
+      }
+      
+      try {
+        const { db, collection, addDoc, serverTimestamp } = window.firebaseApp;
+        
+        // إضافة رسالة إلى قاعدة البيانات
+        await addDoc(collection(db, 'messages'), {
+          text: messageText,
+          sender: state.currentSender,
+          timestamp: serverTimestamp()
+        });
+        
+        // مسح حقل النص
+        elements.messageInput.value = '';
+        
+        // عرض تأثير
+        showHeartExplosion();
+        
+      } catch (error) {
+        console.error('خطأ في إرسال الرسالة:', error);
+        alert('حدث خطأ في إرسال الرسالة، يرجى المحاولة مرة أخرى');
+      }
+    }
+
+    function loadMessages() {
+      if (!window.firebaseApp) {
+        console.error("Firebase غير مهيئ بعد");
+        return;
+      }
+      
+      const { db, collection, onSnapshot, orderBy, query } = window.firebaseApp;
+      
+      try {
+        // الاستماع للتحديثات في الوقت الفعلي
+        const q = query(collection(db, 'messages'), orderBy('timestamp', 'desc'));
+        
+        onSnapshot(q, (snapshot) => {
+          elements.messagesList.innerHTML = '';
+          
+          if (snapshot.empty) {
+            elements.messagesList.innerHTML = '<div class="message-item">لا توجد رسائل بعد. كن أول من يرسل رسالة! 💌</div>';
+            return;
+          }
+          
+          snapshot.forEach((doc) => {
+            const message = doc.data();
+            displayMessage(message);
+          });
+        }, (error) => {
+          console.error("خطأ في تحميل الرسائل:", error);
+          elements.messagesList.innerHTML = '<div class="message-item">تعذر تحميل الرسائل. تأكد من اتصال الإنترنت.</div>';
+        });
+      } catch (error) {
+        console.error("خطأ في إعداد استماع الرسائل:", error);
+        elements.messagesList.innerHTML = '<div class="message-item">تعذر تحميل الرسائل. تأكد من اتصال الإنترنت.</div>';
+      }
+    }
+
+    function displayMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message-item ${message.sender === 'abdo' ? 'message-from-abdo' : 'message-from-menna'}`;
+      
+      const senderName = message.sender === 'abdo' ? 'عبدو 💙' : 'منة 💝';
+      const timestamp = message.timestamp ? 
+        new Date(message.timestamp.toDate()).toLocaleString('ar-EG') : 
+        'الآن';
+      
+      messageDiv.innerHTML = `
+        <div class="message-header">
+          <span class="message-sender">${senderName}</span>
+          <span class="message-time">${timestamp}</span>
+        </div>
+        <div class="message-content">${message.text}</div>
+      `;
+      
+      elements.messagesList.appendChild(messageDiv);
+    }
+
     // بدء التطبيق
     window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
-</html>
+      </html>
