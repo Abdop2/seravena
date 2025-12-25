@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💔 الموقع توقف</title>
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>💔 توقف القلب</title>
     <style>
         * {
             margin: 0;
@@ -13,270 +12,181 @@
         }
 
         body {
-            font-family: 'Almarai', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
             color: #ccc;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
             overflow: hidden;
             position: relative;
         }
 
-        .overlay {
+        /* خلفية خفيفة */
+        .bg-pattern {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M50,50 Q60,30 70,50 T90,50 Q85,65 70,70 T50,90 Q35,85 30,70 T10,50 Q20,30 30,50 T50,50" fill="none" stroke="rgba(255,0,0,0.05)" stroke-width="1"/></svg>');
-            opacity: 0.3;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.02) 0%, transparent 50%);
             z-index: 0;
         }
 
-        .broken-heart {
-            font-size: 8rem;
-            animation: heart-pulse 3s infinite, heart-break 4s infinite;
-            margin-bottom: 1rem;
-            text-shadow: 0 0 30px rgba(255, 0, 0, 0.7);
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes heart-pulse {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.1); opacity: 1; }
-        }
-
-        @keyframes heart-break {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-2deg); }
-            75% { transform: rotate(2deg); }
-        }
-
-        .message-container {
-            max-width: 900px;
-            padding: 2.5rem;
-            background: rgba(10, 10, 10, 0.85);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 0, 0, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 0, 0, 0.1);
-            backdrop-filter: blur(15px);
+        .container {
+            width: 95%;
+            max-width: 600px;
+            padding: 2rem;
+            text-align: center;
             position: relative;
             z-index: 1;
-            margin: 1rem;
         }
 
-        h1 {
-            font-size: 3.2rem;
+        /* القلب المكسور */
+        .broken-heart {
+            font-size: 5rem;
             margin-bottom: 1.5rem;
-            color: #ff4d4d;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.5);
+            animation: heartbeat 3s ease-in-out infinite;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.3));
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            5% {
+                transform: scale(1.1) rotate(-2deg);
+                opacity: 1;
+            }
+            10% {
+                transform: scale(1) rotate(2deg);
+            }
+            15% {
+                transform: scale(1.05) rotate(0deg);
+            }
+        }
+
+        /* النص الرئيسي */
+        .main-title {
+            font-size: 2.2rem;
+            color: #ff6666;
+            margin-bottom: 0.8rem;
             font-weight: 900;
             line-height: 1.3;
-            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .main-message {
-            font-size: 1.7rem;
-            margin-bottom: 2rem;
-            color: #ff9999;
-            font-weight: 800;
-            line-height: 1.7;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-        }
-
-        .sub-message {
-            font-size: 1.3rem;
-            margin-top: 2.5rem;
+        .subtitle {
+            font-size: 1.1rem;
+            color: #999;
             margin-bottom: 2.5rem;
-            color: #aaa;
-            font-style: italic;
-            line-height: 1.6;
-            padding: 1rem;
-            border-top: 1px dashed rgba(255, 0, 0, 0.3);
-            border-bottom: 1px dashed rgba(255, 0, 0, 0.3);
+            line-height: 1.5;
+            font-weight: 300;
         }
 
-        /* تصميم عداد الزمن */
-        .time-since {
-            margin: 2rem 0;
-            padding: 2rem;
-            background: rgba(20, 0, 0, 0.6);
+        /* عداد الزمن */
+        .time-counter {
+            background: rgba(20, 0, 0, 0.3);
             border-radius: 15px;
-            border: 1px solid rgba(255, 0, 0, 0.2);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
         }
 
-        .time-since h2 {
-            font-size: 1.8rem;
+        .counter-title {
+            font-size: 1.1rem;
+            color: #ff8888;
             margin-bottom: 1.5rem;
-            color: #ff6666;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-            font-weight: 800;
+            font-weight: 700;
         }
 
-        .countdown-container {
+        .countdown-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
         }
 
-        .time-unit {
-            background: rgba(30, 0, 0, 0.7);
+        .time-block {
+            background: rgba(255, 0, 0, 0.05);
             border-radius: 10px;
-            padding: 1.2rem 0.5rem;
-            border: 1px solid rgba(255, 0, 0, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s;
+            padding: 1rem 0.5rem;
+            transition: all 0.3s ease;
         }
 
-        .time-unit:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.2);
-            border-color: rgba(255, 0, 0, 0.4);
+        .time-block:hover {
+            background: rgba(255, 0, 0, 0.1);
+            transform: translateY(-2px);
         }
 
         .time-value {
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             color: #ff4d4d;
-            text-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
             margin-bottom: 0.3rem;
+            font-family: 'Courier New', monospace;
         }
 
         .time-label {
-            font-size: 1rem;
+            font-size: 0.85rem;
             color: #cc9999;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-weight: 600;
         }
 
-        .final-message {
-            font-size: 1.2rem;
-            margin-top: 2rem;
+        /* الوقت الكامل */
+        .full-time {
+            background: rgba(0, 0, 0, 0.4);
             padding: 1rem;
-            color: #888;
-            border-top: 1px solid rgba(255, 0, 0, 0.1);
-            font-weight: 700;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #ff8888;
+            border: 1px solid rgba(255, 0, 0, 0.05);
         }
 
-        /* تأثيرات خاصة */
-        .crack {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background-image: 
-                linear-gradient(45deg, transparent 49%, rgba(255, 0, 0, 0.15) 50%, transparent 51%),
-                linear-gradient(-45deg, transparent 49%, rgba(255, 0, 0, 0.15) 50%, transparent 51%);
-            background-size: 60px 60px;
-            opacity: 0.4;
-            z-index: 0;
+        /* الرسائل الحزينة */
+        .sad-messages {
+            margin-top: 2rem;
         }
 
-        .tear {
-            position: absolute;
-            width: 4px;
-            height: 40px;
-            background: linear-gradient(to bottom, rgba(100, 150, 255, 0.7), transparent);
-            border-radius: 50%;
-            animation: fall linear infinite;
-            z-index: 0;
+        .message {
+            font-size: 1rem;
+            color: #aaa;
+            margin: 0.8rem 0;
+            padding: 0.8rem;
+            border-left: 2px solid rgba(255, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 0 8px 8px 0;
+            text-align: right;
+            font-weight: 300;
+            line-height: 1.6;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(20deg);
-                opacity: 0;
-            }
-        }
-
+        /* تأثيرات خفيفة */
         .fade-in {
-            animation: fadeIn 4s ease-out;
+            animation: fadeIn 2s ease-out;
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* تأثير الكتابة */
-        .typewriter {
-            overflow: hidden;
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end);
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        /* تصميم متجاوب */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .main-message {
-                font-size: 1.4rem;
-            }
-            
-            .broken-heart {
-                font-size: 6rem;
-            }
-            
-            .time-value {
-                font-size: 1.8rem;
-            }
-            
-            .countdown-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .main-message {
-                font-size: 1.2rem;
-            }
-            
-            .time-since h2 {
-                font-size: 1.5rem;
-            }
-            
-            .countdown-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .message-container {
-                padding: 1.5rem;
-            }
-        }
-
-        /* تأثيرات إضافية */
-        .pulse-text {
-            animation: text-pulse 2s infinite alternate;
-        }
-
-        @keyframes text-pulse {
-            0% { text-shadow: 0 0 10px rgba(255, 0, 0, 0.5); }
-            100% { text-shadow: 0 0 25px rgba(255, 0, 0, 0.8), 0 0 35px rgba(255, 0, 0, 0.4); }
-        }
-
-        .ghost-heart {
+        .floating-text {
             position: absolute;
+            color: rgba(255, 0, 0, 0.05);
             font-size: 3rem;
-            opacity: 0.1;
-            color: #ff4d4d;
-            animation: float 15s infinite linear;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+            animation: float 20s infinite linear;
         }
 
         @keyframes float {
@@ -284,285 +194,416 @@
             100% { transform: translate(100px, 100px) rotate(360deg); }
         }
 
-        .blood-drop {
+        /* دموع خفيفة */
+        .tear {
             position: absolute;
-            width: 8px;
-            height: 12px;
-            background: radial-gradient(ellipse at center, rgba(255,0,0,0.7) 0%, rgba(255,0,0,0) 70%);
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, rgba(100, 150, 255, 0.3), transparent);
             border-radius: 50%;
-            animation: blood-drop 8s infinite linear;
+            animation: tear-fall 3s linear infinite;
             z-index: 0;
         }
 
-        @keyframes blood-drop {
-            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        @keyframes tear-fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* تصميم متجاوب */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .broken-heart {
+                font-size: 4rem;
+            }
+            
+            .countdown-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .time-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .countdown-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .main-title {
+                font-size: 1.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+
+        /* تأثيرات نصية بسيطة */
+        .highlight {
+            color: #ff6666;
+            font-weight: 700;
+        }
+
+        /* خط خفيف للتواريخ */
+        .date {
+            font-family: 'Courier New', monospace;
+            color: #ff9999;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* شريط تقدم خفيف */
+        .progress-bar {
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 0, 0, 0.1);
+            margin: 1.5rem 0;
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #ff4d4d, transparent);
+            width: 30%;
+            animation: progress-move 3s infinite ease-in-out;
+        }
+
+        @keyframes progress-move {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
         }
     </style>
 </head>
 <body>
-    <div class="overlay"></div>
-    <div class="crack"></div>
+    <div class="bg-pattern"></div>
     
-    <div class="message-container fade-in">
+    <!-- نصوص عائمة خفيفة -->
+    <div class="floating-text" style="top:20%; left:10%;">💔</div>
+    <div class="floating-text" style="top:60%; left:80%;">🖤</div>
+    <div class="floating-text" style="top:80%; left:20%;">🌑</div>
+    
+    <div class="container fade-in">
         <div class="broken-heart">💔</div>
         
-        <h1 class="typewriter pulse-text">
-            تدمر قلب الموقع فتوقف عن العمل
+        <h1 class="main-title">
+            تدمر القلب<br>فتوقف عن العمل
         </h1>
         
-        <div class="main-message">
-            كل شيء انتهى... كل الذكريات الجميلة تحولت إلى ألم صامت.<br>
-            الأحلام تحطمت والوعود تبخرت.<br>
-            لم يعد هناك شيء يستحق البقاء.<br>
-            القلب المجروح توقف عن النبض إلى الأبد.
-        </div>
+        <p class="subtitle">
+            منذ ذلك اليوم... والجرح لا يندمل<br>
+            كل شيء توقف عند هذه اللحظة
+        </p>
         
         <!-- عداد الزمن -->
-        <div class="time-since">
-            <h2>الزمن المنقضي منذ بداية النهاية</h2>
-            <div class="main-date">٢ مارس ٢٠٢٤</div>
+        <div class="time-counter">
+            <div class="counter-title">الزمن المنقضي منذ البداية</div>
+            <div class="date">٢ مارس ٢٠٢٤</div>
             
-            <div class="countdown-container">
-                <div class="time-unit">
+            <div class="countdown-grid">
+                <div class="time-block">
                     <div class="time-value" id="years">0</div>
                     <div class="time-label">سنوات</div>
                 </div>
-                <div class="time-unit">
+                <div class="time-block">
                     <div class="time-value" id="months">0</div>
                     <div class="time-label">أشهر</div>
                 </div>
-                <div class="time-unit">
+                <div class="time-block">
                     <div class="time-value" id="weeks">0</div>
                     <div class="time-label">أسابيع</div>
                 </div>
-                <div class="time-unit">
+                <div class="time-block">
                     <div class="time-value" id="days">0</div>
                     <div class="time-label">أيام</div>
                 </div>
-                <div class="time-unit">
+                <div class="time-block">
                     <div class="time-value" id="hours">0</div>
                     <div class="time-label">ساعات</div>
                 </div>
-                <div class="time-unit">
+                <div class="time-block">
                     <div class="time-value" id="minutes">0</div>
                     <div class="time-label">دقائق</div>
                 </div>
-                <div class="time-unit">
-                    <div class="time-value" id="seconds">0</div>
-                    <div class="time-label">ثواني</div>
-                </div>
             </div>
             
-            <div class="sub-message">
-                كل هذه المدة الطويلة من الألم...<br>
-                وكل لحظة تمر تزيد الجروح عمقًا
+            <div class="full-time" id="fullTime">
+                <span id="seconds">0</span> ثانية
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress"></div>
             </div>
         </div>
         
-        <div class="final-message">
-            💔🖤🌑 ...النهاية الحزينة لكل ما كان جميلاً<br>
-            غاب الحب وبقيت الجروح لا تندمل
+        <!-- الرسائل الحزينة -->
+        <div class="sad-messages">
+            <div class="message">
+                كل ثانية تمر تذكرني بأن <span class="highlight">القلب</span> توقف عن النبض
+            </div>
+            <div class="message">
+                الذكريات أصبحت <span class="highlight">أشباحًا</span> تطارد كل لحظة
+            </div>
+            <div class="message">
+                النهاية كانت أكثر حزنًا مما توقعت
+            </div>
         </div>
     </div>
 
     <script>
-        // إنشاء دموع متساقطة
-        function createTears() {
-            setInterval(() => {
-                const tear = document.createElement('div');
-                tear.classList.add('tear');
-                tear.style.left = Math.random() * 100 + 'vw';
-                tear.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                document.body.appendChild(tear);
-                
+        // تهيئة النصوص العائمة
+        function initFloatingTexts() {
+            for (let i = 0; i < 5; i++) {
                 setTimeout(() => {
-                    tear.remove();
-                }, 5000);
-            }, 400);
-        }
-        
-        // إنشاء قلوب شبحية
-        function createGhostHearts() {
-            for (let i = 0; i < 10; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('ghost-heart');
-                heart.innerHTML = '💔';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = Math.random() * 100 + 'vh';
-                heart.style.animationDuration = (Math.random() * 20 + 10) + 's';
-                heart.style.fontSize = (Math.random() * 2 + 1) + 'rem';
-                document.body.appendChild(heart);
+                    const text = document.createElement('div');
+                    text.className = 'floating-text';
+                    text.innerHTML = '💔';
+                    text.style.left = Math.random() * 100 + 'vw';
+                    text.style.top = Math.random() * 100 + 'vh';
+                    text.style.fontSize = (Math.random() * 2 + 1.5) + 'rem';
+                    text.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                    document.body.appendChild(text);
+                }, i * 500);
             }
         }
         
-        // إنشاء قطرات دم
-        function createBloodDrops() {
+        // إنشاء دموع خفيفة
+        function createTears() {
             setInterval(() => {
-                const drop = document.createElement('div');
-                drop.classList.add('blood-drop');
-                drop.style.left = Math.random() * 100 + 'vw';
-                drop.style.animationDuration = (Math.random() * 5 + 3) + 's';
-                document.body.appendChild(drop);
+                const tear = document.createElement('div');
+                tear.className = 'tear';
+                tear.style.left = Math.random() * 100 + 'vw';
+                tear.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(tear);
                 
-                setTimeout(() => {
-                    drop.remove();
-                }, 8000);
-            }, 1000);
+                setTimeout(() => tear.remove(), 3000);
+            }, 1500);
         }
         
-        // حساب الوقت المنقضي منذ 2/3/2024
+        // حساب الوقت المنقضي
         function calculateTimeSince() {
-            const startDate = new Date('2024-03-02');
+            const startDate = new Date('2024-03-02T00:00:00');
             const now = new Date();
             const diffInMs = now - startDate;
             
-            // حساب السنوات
-            const years = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 365.25));
+            // حساب الوقت
+            const totalSeconds = Math.floor(diffInMs / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const totalHours = Math.floor(totalMinutes / 60);
+            const totalDays = Math.floor(totalHours / 24);
             
-            // حساب الأشهر
-            const months = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 30.44)) % 12;
+            // حساب بالتفصيل
+            const years = Math.floor(totalDays / 365.25);
+            const months = Math.floor((totalDays % 365.25) / 30.44);
+            const weeks = Math.floor((totalDays % 30.44) / 7);
+            const days = Math.floor(totalDays % 7);
+            const hours = totalHours % 24;
+            const minutes = totalMinutes % 60;
+            const seconds = totalSeconds % 60;
             
-            // حساب الأسابيع
-            const weeks = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 7)) % 4;
-            
-            // حساب الأيام
-            const days = Math.floor(diffInMs / (1000 * 60 * 60 * 24)) % 30;
-            
-            // حساب الساعات
-            const hours = Math.floor(diffInMs / (1000 * 60 * 60)) % 24;
-            
-            // حساب الدقائق
-            const minutes = Math.floor(diffInMs / (1000 * 60)) % 60;
-            
-            // حساب الثواني
-            const seconds = Math.floor(diffInMs / 1000) % 60;
-            
-            // تحديث القيم في الصفحة
+            // تحديث العرض
             document.getElementById('years').textContent = years;
             document.getElementById('months').textContent = months;
             document.getElementById('weeks').textContent = weeks;
             document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours;
-            document.getElementById('minutes').textContent = minutes;
-            document.getElementById('seconds').textContent = seconds;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
             
-            // تغيير لون الأرقام بناء على القيمة
-            const timeUnits = document.querySelectorAll('.time-value');
-            timeUnits.forEach(unit => {
-                const value = parseInt(unit.textContent);
+            // تأثيرات على الأرقام
+            updateNumberEffects(years, months, weeks, days, hours, minutes, seconds);
+            
+            // تحديث الوقت الكامل
+            updateFullTimeDisplay(years, months, weeks, days, hours, minutes, seconds);
+        }
+        
+        // تأثيرات على الأرقام
+        function updateNumberEffects(y, m, w, d, h, min, s) {
+            const blocks = document.querySelectorAll('.time-block');
+            const values = [y, m, w, d, h, min];
+            
+            blocks.forEach((block, index) => {
+                const value = values[index];
+                const timeValue = block.querySelector('.time-value');
+                
                 if (value > 0) {
-                    // زيادة الاحمرار مع زيادة القيمة
-                    const redIntensity = Math.min(255, 100 + value * 10);
-                    unit.style.color = `rgb(255, ${Math.max(0, 150 - value * 5)}, ${Math.max(0, 150 - value * 5)})`;
-                    unit.style.textShadow = `0 0 15px rgba(255, 0, 0, ${0.5 + value/100})`;
+                    // تغيير الشدة بناء على القيمة
+                    const intensity = Math.min(1, value / 100);
+                    timeValue.style.textShadow = `0 0 ${5 + intensity * 10}px rgba(255, 0, 0, ${0.3 + intensity * 0.3})`;
+                    
+                    // تأثير النبض للأرقام الكبيرة
+                    if (value > 10 && index < 2) {
+                        timeValue.style.animation = `pulse 2s infinite`;
+                    }
                 }
             });
         }
         
-        // تغيير لون الخلفية بشكل تدريجي
-        let hue = 0;
-        function updateBackground() {
-            hue = (hue + 0.05) % 360;
-            const darkRed = `hsl(${hue}, 70%, 5%)`;
-            const darkerRed = `hsl(${hue + 20}, 80%, 8%)`;
-            document.body.style.background = `linear-gradient(135deg, ${darkRed} 0%, ${darkerRed} 50%, ${darkRed} 100%)`;
-        }
-        
-        // تأثير اهتزاز خفيف للقلب المكسور
-        function applyHeartShake() {
-            const heart = document.querySelector('.broken-heart');
-            setInterval(() => {
-                heart.style.transform = `translateX(${Math.random() * 5 - 2.5}px) translateY(${Math.random() * 5 - 2.5}px) rotate(${Math.random() * 4 - 2}deg)`;
-            }, 100);
-        }
-        
-        // تأثير الكتابة على النص الرئيسي
-        function typeWriterEffect() {
-            const text = "تدمر قلب الموقع فتوقف عن العمل";
-            const element = document.querySelector('h1');
-            element.innerHTML = '';
+        // تحديث عرض الوقت الكامل
+        function updateFullTimeDisplay(y, m, w, d, h, min, s) {
+            const fullTimeElement = document.getElementById('fullTime');
+            const parts = [];
             
-            let i = 0;
-            function typeChar() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(typeChar, 100);
-                }
+            if (y > 0) parts.push(`${y} سنة`);
+            if (m > 0) parts.push(`${m} شهر`);
+            if (w > 0) parts.push(`${w} أسبوع`);
+            if (d > 0) parts.push(`${d} يوم`);
+            if (h > 0) parts.push(`${h} ساعة`);
+            if (min > 0) parts.push(`${min} دقيقة`);
+            
+            if (parts.length > 0) {
+                fullTimeElement.innerHTML = `${parts.join('، ')}<br><span style="font-size:0.8rem;color:#999">و ${s} ثانية</span>`;
             }
-            
-            setTimeout(typeChar, 1000);
         }
         
-        // تهيئة الصفحة عند التحميل
-        window.addEventListener('load', () => {
-            createTears();
-            createGhostHearts();
-            createBloodDrops();
-            applyHeartShake();
-            typeWriterEffect();
+        // تأثير النبض للأرقام
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { opacity: 1; transform: scale(1); }
+                50% { opacity: 0.8; transform: scale(1.05); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // تغيير لون الخلفية تدريجيًا
+        let bgHue = 0;
+        function updateBackground() {
+            bgHue = (bgHue + 0.2) % 360;
+            document.body.style.backgroundColor = `hsl(${bgHue}, 50%, 3%)`;
             
-            // تحديث العدادات كل ثانية
+            // تحديث نمط الخلفية
+            const bgPattern = document.querySelector('.bg-pattern');
+            if (bgPattern) {
+                bgPattern.style.background = `
+                    radial-gradient(circle at 20% 30%, hsla(${bgHue}, 70%, 50%, 0.03) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, hsla(${bgHue + 60}, 70%, 50%, 0.02) 0%, transparent 50%)
+                `;
+            }
+        }
+        
+        // تأثيرات تفاعلية
+        function initInteractiveEffects() {
+            // تأثير عند مرور الماوس على الكتل الزمنية
+            document.querySelectorAll('.time-block').forEach(block => {
+                block.addEventListener('mouseenter', () => {
+                    const value = block.querySelector('.time-value').textContent;
+                    if (parseInt(value) > 0) {
+                        block.style.transform = 'translateY(-5px) scale(1.05)';
+                        block.style.boxShadow = '0 5px 15px rgba(255, 0, 0, 0.2)';
+                    }
+                });
+                
+                block.addEventListener('mouseleave', () => {
+                    block.style.transform = 'translateY(0) scale(1)';
+                    block.style.boxShadow = 'none';
+                });
+            });
+            
+            // تأثير النقر على القلب
+            const heart = document.querySelector('.broken-heart');
+            heart.addEventListener('click', () => {
+                heart.style.animation = 'none';
+                setTimeout(() => {
+                    heart.style.animation = 'heartbeat 3s ease-in-out infinite';
+                }, 10);
+                
+                // إضافة دموع إضافية
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const tear = document.createElement('div');
+                        tear.className = 'tear';
+                        tear.style.left = (50 + Math.random() * 20 - 10) + 'vw';
+                        tear.style.animationDuration = '1.5s';
+                        document.body.appendChild(tear);
+                        setTimeout(() => tear.remove(), 1500);
+                    }, i * 100);
+                }
+            });
+        }
+        
+        // تهيئة الصفحة
+        window.addEventListener('load', () => {
+            // تهيئة التأثيرات
+            initFloatingTexts();
+            createTears();
+            initInteractiveEffects();
+            
+            // حساب الوقت أول مرة
             calculateTimeSince();
+            
+            // تحديث الوقت كل ثانية
             setInterval(calculateTimeSince, 1000);
             
-            // تحديث الخلفية كل 5 ثوان
-            setInterval(updateBackground, 5000);
+            // تحديث الخلفية كل 10 ثوانٍ
+            setInterval(updateBackground, 10000);
             
-            // إضافة تأثيرات صوتية (اختياري - يمكن إلغاء التعليق لتفعيل الصوت)
-            /*
-            try {
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                // إنشاء صوت حزين بسيط
-                const oscillator = audioContext.createOscillator();
-                const gainNode = audioContext.createGain();
-                oscillator.connect(gainNode);
-                gainNode.connect(audioContext.destination);
-                
-                oscillator.frequency.value = 220;
-                oscillator.type = 'sine';
-                gainNode.gain.value = 0.02;
-                
-                oscillator.start();
-                
-                // تغيير التردد بشكل عشوائي
-                setInterval(() => {
-                    oscillator.frequency.value = 200 + Math.random() * 50;
-                }, 3000);
-            } catch (e) {
-                console.log("تعذر تشغيل الصوت");
-            }
-            */
+            // تغيير الرسائل بشكل دوري
+            const messages = [
+                "كل ثانية تمر تذكرني بأن القلب توقف عن النبض",
+                "الذكريات أصبحت أشباحًا تطارد كل لحظة",
+                "النهاية كانت أكثر حزنًا مما توقعت",
+                "الوقت لا يشفي الجرح، فقط يجعله مؤلماً بطريقة مختلفة",
+                "ما كان جميلاً أصبح ذكرى موجعة",
+                "لا شيء يبقى كما كان... حتى الذكريات تتلاشى",
+                "الألم صامت لكن صوته يطن في الروح",
+                "الحب مات وبقيت الذكرى كسكين في القلب"
+            ];
+            
+            let messageIndex = 0;
+            setInterval(() => {
+                const messageElements = document.querySelectorAll('.message');
+                messageElements.forEach(el => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateX(10px)';
+                    
+                    setTimeout(() => {
+                        messageIndex = (messageIndex + 1) % messages.length;
+                        el.textContent = messages[messageIndex];
+                        
+                        // إضافة highlight عشوائي
+                        const words = el.textContent.split(' ');
+                        if (words.length > 3) {
+                            const randomWord = words[Math.floor(Math.random() * words.length)];
+                            el.innerHTML = el.textContent.replace(randomWord, `<span class="highlight">${randomWord}</span>`);
+                        }
+                        
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateX(0)';
+                    }, 300);
+                });
+            }, 8000);
         });
         
-        // تأثيرات تفاعلية عند تمرير الماوس
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
+        // تأثيرات إضافية للنصوص
+        document.addEventListener('DOMContentLoaded', () => {
+            // تأثير كتابة للنص الرئيسي
+            const title = document.querySelector('.main-title');
+            const originalText = title.innerHTML;
+            title.innerHTML = '';
             
-            // تحريك الخلفية قليلاً
-            document.body.style.backgroundPosition = `${x * 20}px ${y * 20}px`;
+            let charIndex = 0;
+            function typeTitle() {
+                if (charIndex < originalText.length) {
+                    title.innerHTML += originalText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeTitle, 50);
+                }
+            }
             
-            // إضافة تموج عند النقر
-            document.addEventListener('click', (e) => {
-                const ripple = document.createElement('div');
-                ripple.style.position = 'absolute';
-                ripple.style.left = e.clientX + 'px';
-                ripple.style.top = e.clientY + 'px';
-                ripple.style.width = '0px';
-                ripple.style.height = '0px';
-                ripple.style.borderRadius = '50%';
-                ripple.style.border = '2px solid rgba(255, 0, 0, 0.3)';
-                ripple.style.animation = 'ripple 1s linear';
-                document.body.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 1000);
-            });
+            setTimeout(typeTitle, 1000);
         });
     </script>
 </body>
