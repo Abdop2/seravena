@@ -5,286 +5,482 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💔</title>
     <style>
-        /* Reset */
+        /* Reset بسيط */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* أنماط أساسية خفيفة */
+        :root {
+            --primary-color: #ff4757;
+            --secondary-color: #2f3542;
+            --text-color: #dfe4ea;
+            --bg-color: #0c0c0c;
+            --accent-color: #ff6b81;
+        }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background: #000;
-            color: #eee;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 10px;
-            line-height: 1.4;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 71, 87, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 107, 129, 0.05) 0%, transparent 20%);
         }
 
         /* الحاوية الرئيسية */
-        .container {
+        .card {
+            background: linear-gradient(145deg, rgba(47, 53, 66, 0.9), rgba(20, 20, 20, 0.95));
+            border-radius: 20px;
+            padding: 30px;
             width: 100%;
-            max-width: 400px;
-            padding: 20px;
+            max-width: 450px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 71, 87, 0.1),
+                inset 0 0 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: glow 3s infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* القلب المكسور */
+        .heart-container {
             text-align: center;
+            margin-bottom: 25px;
+            position: relative;
         }
 
-        /* القلب */
-        .heart {
-            font-size: 60px;
-            margin: 10px 0 20px;
-            animation: beat 2.5s ease-in-out infinite;
+        .broken-heart {
+            font-size: 4.5rem;
+            display: inline-block;
+            animation: heartBeat 2.5s infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 71, 87, 0.3));
+            position: relative;
         }
 
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .heart-crack {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.9;
+            }
+            15% { transform: scale(1.15) rotate(-3deg); opacity: 1; }
+            30% { transform: scale(1.05) rotate(2deg); }
+            45% { transform: scale(1.1) rotate(0deg); }
         }
 
         /* العنوان */
-        .title {
-            font-size: 22px;
-            color: #ff6666;
-            font-weight: bold;
-            margin-bottom: 15px;
+        .title-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .main-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-weight: 700;
             line-height: 1.3;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .subtitle {
-            font-size: 15px;
+            font-size: 0.95rem;
             color: #aaa;
-            margin-bottom: 30px;
+            opacity: 0.8;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        /* التاريخ */
+        .date-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 71, 87, 0.15);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: 600;
         }
 
         /* عداد الزمن */
-        .counter {
-            margin: 25px 0;
+        .counter-section {
+            margin: 30px 0;
         }
 
         .counter-title {
-            font-size: 16px;
-            color: #ff8888;
-            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            text-align: center;
             font-weight: 600;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0 15px;
+        }
+
+        .counter-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
 
         .time-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 15px;
         }
 
-        .time-box {
-            background: rgba(255, 0, 0, 0.05);
-            border-radius: 8px;
-            padding: 12px 5px;
-            border: 1px solid rgba(255, 0, 0, 0.1);
+        .time-unit {
+            background: linear-gradient(145deg, rgba(40, 40, 40, 0.8), rgba(30, 30, 30, 0.9));
+            border-radius: 12px;
+            padding: 15px 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .time-unit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .time-unit:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 71, 87, 0.2);
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.1);
+        }
+
+        .time-unit:hover::before {
+            opacity: 1;
         }
 
         .time-value {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ff5555;
-            margin-bottom: 3px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
             font-family: 'Courier New', monospace;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(255, 71, 87, 0.2);
         }
 
         .time-label {
-            font-size: 12px;
-            color: #cc9999;
+            font-size: 0.85rem;
+            color: #aaa;
+            font-weight: 500;
+            letter-spacing: 1px;
         }
 
-        /* الوقت الكامل */
-        .full-time {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 12px;
-            color: #ff9999;
+        /* الوقت التفصيلي */
+        .detailed-time {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 15px;
             margin-top: 15px;
-            line-height: 1.5;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            line-height: 1.6;
         }
 
         /* الرسائل */
-        .message-box {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 20px;
-            border: 1px solid rgba(255, 0, 0, 0.05);
+        .messages-section {
+            margin-top: 25px;
         }
 
         .message {
-            font-size: 14px;
-            color: #bbb;
-            margin: 10px 0;
-            padding: 8px;
-            border-right: 2px solid rgba(255, 0, 0, 0.2);
-            text-align: right;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-right: 3px solid var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* تذييل الصفحة */
+        .message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 71, 87, 0.03), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s;
+        }
+
+        .message:hover::before {
+            transform: translateX(100%);
+        }
+
+        .message:hover {
+            transform: translateX(-5px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .message-text {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* التذييل */
         .footer {
-            margin-top: 25px;
-            font-size: 11px;
-            color: #777;
-            padding-top: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #777;
         }
 
-        /* تحسينات للشاشات الصغيرة جداً */
-        @media (max-width: 350px) {
-            .container {
-                padding: 15px;
+        /* تلميحات للوقت */
+        .time-tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            border: 1px solid rgba(255, 71, 87, 0.2);
+        }
+
+        /* تأثيرات القطرات */
+        .tear-drop {
+            position: fixed;
+            width: 2px;
+            height: 10px;
+            background: linear-gradient(to bottom, rgba(100, 149, 237, 0.4), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+            animation: tearFall linear forwards;
+        }
+
+        @keyframes tearFall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* تحسينات للشاشات الصغيرة */
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
+                border-radius: 15px;
             }
             
-            .heart {
-                font-size: 50px;
+            .broken-heart {
+                font-size: 3.5rem;
             }
             
-            .title {
-                font-size: 20px;
+            .main-title {
+                font-size: 1.5rem;
             }
             
             .time-grid {
                 grid-template-columns: 1fr;
+                gap: 10px;
             }
             
             .time-value {
-                font-size: 18px;
+                font-size: 1.6rem;
+            }
+            
+            .time-unit {
+                padding: 12px 8px;
             }
         }
 
         /* تحسينات للشاشات الكبيرة */
         @media (min-width: 768px) {
-            .container {
-                max-width: 450px;
-                padding: 25px;
+            .card {
+                max-width: 500px;
+                padding: 35px;
+            }
+            
+            .broken-heart {
+                font-size: 5rem;
+            }
+            
+            .main-title {
+                font-size: 2rem;
             }
             
             .time-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
-            
-            .heart {
-                font-size: 70px;
-            }
-            
-            .title {
-                font-size: 24px;
-            }
         }
 
-        /* تأثيرات بسيطة */
-        .highlight {
-            color: #ff7777;
-            font-weight: 600;
+        /* تأثيرات خاصة للأرقام */
+        .pulse {
+            animation: numberPulse 0.5s;
         }
 
-        .date {
-            font-size: 13px;
-            color: #ff9999;
-            margin: 10px 0;
-            font-family: 'Courier New', monospace;
+        @keyframes numberPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        /* شريط تقدم خفيف */
-        .progress {
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 0, 0, 0.1);
-            margin: 15px 0;
-            border-radius: 1px;
+        /* شريط التقدم */
+        .progress-container {
+            height: 3px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 2px;
+            margin: 20px 0;
             overflow: hidden;
         }
 
         .progress-bar {
             height: 100%;
-            width: 40%;
-            background: #ff5555;
-            animation: progress 3s infinite ease-in-out;
+            width: 30%;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            animation: progressSlide 3s infinite linear;
         }
 
-        @keyframes progress {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(200%); }
-        }
-
-        /* تأثيرات ديناميكية بسيطة */
-        .pulse {
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        @keyframes progressSlide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="card">
         <!-- القلب المكسور -->
-        <div class="heart pulse">💔</div>
-        
+        <div class="heart-container">
+            <div class="heart-crack">💔</div>
+            <div class="broken-heart">💔</div>
+        </div>
+
         <!-- العنوان -->
-        <h1 class="title">تدمر القلب<br>فتوقف عن العمل</h1>
-        <p class="subtitle">منذ ذلك اليوم... والجرح لا يندمل</p>
-        
+        <div class="title-container">
+            <h1 class="main-title">تدمر القلب<br>فتوقف عن العمل</h1>
+            <p class="subtitle">منذ ذلك اليوم... والجرح لا يندمل</p>
+        </div>
+
         <!-- التاريخ -->
-        <div class="date">٢ مارس ٢٠٢٤</div>
-        
+        <div class="date-box">
+            منذ ٢ مارس ٢٠٢٤
+        </div>
+
         <!-- شريط التقدم -->
-        <div class="progress">
+        <div class="progress-container">
             <div class="progress-bar"></div>
         </div>
-        
+
         <!-- عداد الزمن -->
-        <div class="counter">
-            <div class="counter-title">الوقت المنقضي</div>
+        <div class="counter-section">
+            <div class="counter-title">الزمن المنقضي</div>
             
             <div class="time-grid">
-                <div class="time-box">
+                <div class="time-unit">
                     <div class="time-value" id="years">0</div>
                     <div class="time-label">سنوات</div>
                 </div>
-                <div class="time-box">
+                <div class="time-unit">
                     <div class="time-value" id="months">0</div>
                     <div class="time-label">أشهر</div>
                 </div>
-                <div class="time-box">
+                <div class="time-unit">
                     <div class="time-value" id="days">0</div>
                     <div class="time-label">أيام</div>
                 </div>
-                <div class="time-box">
+                <div class="time-unit">
                     <div class="time-value" id="hours">00</div>
                     <div class="time-label">ساعات</div>
                 </div>
             </div>
-            
-            <div class="full-time" id="detailedTime">
-                <span id="minutes">00</span> دقيقة 
-                <span id="seconds">00</span> ثانية
+
+            <div class="detailed-time" id="detailedTime">
+                <div id="minutes">00</div>
+                <div id="seconds">00</div>
             </div>
         </div>
-        
+
         <!-- الرسائل -->
-        <div class="message-box">
+        <div class="messages-section">
             <div class="message">
-                كل <span class="highlight">ثانية</span> تمر تذكرني بأن القلب توقف عن النبض
+                <div class="message-text">
+                    كل <span class="highlight">ثانية</span> تمر تذكرني بأن القلب توقف عن النبض
+                </div>
             </div>
             <div class="message">
-                الذكريات أصبحت <span class="highlight">أشباحًا</span> تطارد كل لحظة
+                <div class="message-text">
+                    الذكريات أصبحت <span class="highlight">أشباحًا</span> تطارد كل لحظة
+                </div>
             </div>
             <div class="message">
-                النهاية كانت أكثر حزنًا مما توقعت
+                <div class="message-text">
+                    النهاية كانت أكثر حزنًا مما توقعت
+                </div>
             </div>
         </div>
-        
+
         <!-- التذييل -->
         <div class="footer">
             💔 النهاية الحزينة لكل ما كان جميلاً
@@ -292,56 +488,107 @@
     </div>
 
     <script>
-        // حساب الوقت المنقضي منذ 2/3/2024
-        function updateTime() {
+        // حساب الوقت المنقضي
+        function calculateTimeSince() {
             const startDate = new Date('2024-03-02T00:00:00');
             const now = new Date();
             const diff = now - startDate;
             
-            // الحسابات الأساسية
             const totalSeconds = Math.floor(diff / 1000);
             const totalMinutes = Math.floor(totalSeconds / 60);
             const totalHours = Math.floor(totalMinutes / 60);
             const totalDays = Math.floor(totalHours / 24);
             
-            // الحسابات الدقيقة
             const years = Math.floor(totalDays / 365.25);
             const months = Math.floor((totalDays % 365.25) / 30.44);
-            const days = totalDays % 30;
+            const days = Math.floor(totalDays % 30.44);
             const hours = totalHours % 24;
             const minutes = totalMinutes % 60;
             const seconds = totalSeconds % 60;
             
-            // تحديث الواجهة
-            document.getElementById('years').textContent = years;
-            document.getElementById('months').textContent = months;
-            document.getElementById('days').textContent = days;
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            return { years, months, days, hours, minutes, seconds, totalDays };
+        }
+        
+        // تحديث الواجهة
+        function updateDisplay() {
+            const time = calculateTimeSince();
+            
+            // تحديث القيم
+            document.getElementById('years').textContent = time.years;
+            document.getElementById('months').textContent = time.months;
+            document.getElementById('days').textContent = time.days;
+            document.getElementById('hours').textContent = time.hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = time.minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = time.seconds.toString().padStart(2, '0');
             
             // تحديث الوقت التفصيلي
-            updateDetailedTime(years, months, days, hours, minutes, seconds);
+            updateDetailedDisplay(time);
+            
+            // تأثيرات على الأرقام
+            animateNumbers();
+            
+            // إنشاء دموع عشوائية
+            if (Math.random() > 0.7) createTear();
         }
         
-        // تحديث الوقت التفصيلي
-        function updateDetailedTime(y, m, d, h, min, s) {
+        // تحديث العرض التفصيلي
+        function updateDetailedDisplay(time) {
             const parts = [];
-            if (y > 0) parts.push(`${y} سنة`);
-            if (m > 0) parts.push(`${m} شهر`);
-            if (d > 0) parts.push(`${d} يوم`);
+            if (time.years > 0) parts.push(`${time.years} سنة`);
+            if (time.months > 0) parts.push(`${time.months} شهر`);
+            if (time.days > 0) parts.push(`${time.days} يوم`);
             
             const detailedElement = document.getElementById('detailedTime');
-            if (parts.length > 0) {
-                detailedElement.innerHTML = 
-                    `${parts.join('، ')}<br>` +
-                    `<span>${h.toString().padStart(2, '0')} ساعة</span> ` +
-                    `<span>${min.toString().padStart(2, '0')} دقيقة</span> ` +
-                    `<span>${s.toString().padStart(2, '0')} ثانية</span>`;
-            }
+            detailedElement.innerHTML = `
+                <div style="margin-bottom: 5px; color: #aaa; font-size: 0.8rem;">
+                    ${parts.join('، ')}
+                </div>
+                <div style="display: flex; justify-content: center; gap: 20px; font-family: 'Courier New', monospace;">
+                    <div>
+                        <div style="font-size: 1.2rem; color: #ff6b81; font-weight: bold;">${time.minutes.toString().padStart(2, '0')}</div>
+                        <div style="font-size: 0.7rem; color: #aaa;">دقيقة</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 1.2rem; color: #ff6b81; font-weight: bold;">${time.seconds.toString().padStart(2, '0')}</div>
+                        <div style="font-size: 0.7rem; color: #aaa;">ثانية</div>
+                    </div>
+                </div>
+            `;
         }
         
-        // تغيير الرسائل دورياً
+        // تأثيرات على الأرقام
+        function animateNumbers() {
+            const numbers = document.querySelectorAll('.time-value');
+            numbers.forEach(num => {
+                const oldValue = parseInt(num.dataset.oldValue || 0);
+                const newValue = parseInt(num.textContent);
+                
+                if (oldValue !== newValue) {
+                    num.classList.add('pulse');
+                    num.dataset.oldValue = newValue;
+                    
+                    setTimeout(() => {
+                        num.classList.remove('pulse');
+                    }, 500);
+                }
+            });
+        }
+        
+        // إنشاء دموع
+        function createTear() {
+            const tear = document.createElement('div');
+            tear.className = 'tear-drop';
+            tear.style.left = Math.random() * 100 + 'vw';
+            tear.style.top = '-10px';
+            tear.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            document.body.appendChild(tear);
+            
+            setTimeout(() => {
+                tear.remove();
+            }, 3000);
+        }
+        
+        // قائمة الرسائل
         const messages = [
             "كل ثانية تمر تذكرني بأن القلب توقف عن النبض",
             "الذكريات أصبحت أشباحًا تطارد كل لحظة",
@@ -350,118 +597,130 @@
             "ما كان جميلاً أصبح ذكرى موجعة",
             "لا شيء يبقى كما كان... حتى الذكريات تتلاشى",
             "الألم صامت لكن صوته يطن في الروح",
-            "الحب مات وبقيت الذكرى كسكين في القلب"
+            "الحب مات وبقيت الذكرى كسكين في القلب",
+            "كل لحظة مرت أصبحت جرحاً جديداً",
+            "النهاية كانت صمتاً طويلاً بعد صرخة قصيرة",
+            "الذكريات تموت ببطء، لكن الألم يبقى",
+            "ما كان حلماً أصبح كابوساً لا ينتهي"
         ];
         
-        let currentMessage = 0;
+        // تغيير الرسائل
+        let messageIndex = 0;
         function rotateMessages() {
-            const messageElements = document.querySelectorAll('.message');
+            const messageElements = document.querySelectorAll('.message-text');
+            
             messageElements.forEach((el, index) => {
                 setTimeout(() => {
-                    currentMessage = (currentMessage + 1) % messages.length;
-                    const newMessage = messages[currentMessage];
+                    messageIndex = (messageIndex + 1) % messages.length;
+                    const newMessage = messages[messageIndex];
                     
-                    // إضافة كلمة مبرزة عشوائياً
+                    // إبراز كلمة عشوائية
                     const words = newMessage.split(' ');
-                    const highlightedWord = words[Math.floor(Math.random() * words.length)];
-                    const highlightedMessage = newMessage.replace(
-                        highlightedWord, 
-                        `<span class="highlight">${highlightedWord}</span>`
-                    );
+                    const randomIndex = Math.floor(Math.random() * words.length);
+                    words[randomIndex] = `<span class="highlight">${words[randomIndex]}</span>`;
                     
-                    el.innerHTML = highlightedMessage;
-                }, index * 2000);
+                    el.innerHTML = words.join(' ');
+                    
+                    // تأثير ظهور
+                    el.parentElement.style.opacity = '0';
+                    el.parentElement.style.transform = 'translateX(10px)';
+                    
+                    setTimeout(() => {
+                        el.parentElement.style.opacity = '1';
+                        el.parentElement.style.transform = 'translateX(0)';
+                    }, 300);
+                }, index * 800);
             });
         }
         
-        // تأثير بسيط على الأرقام
-        function animateNumbers() {
-            const numbers = document.querySelectorAll('.time-value');
-            numbers.forEach(num => {
-                if (parseInt(num.textContent) > 0) {
-                    num.classList.add('pulse');
+        // تأثيرات تفاعلية
+        function initInteractiveEffects() {
+            // تأثير عند المرور على وحدات الوقت
+            document.querySelectorAll('.time-unit').forEach(unit => {
+                unit.addEventListener('mouseenter', function() {
+                    const value = this.querySelector('.time-value').textContent;
+                    const label = this.querySelector('.time-label').textContent;
+                    
+                    // إنشاء تلميحة
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'time-tooltip';
+                    tooltip.textContent = `${value} ${label}`;
+                    this.appendChild(tooltip);
+                    
                     setTimeout(() => {
-                        num.classList.remove('pulse');
-                    }, 1000);
+                        tooltip.style.opacity = '1';
+                    }, 10);
+                });
+                
+                unit.addEventListener('mouseleave', function() {
+                    const tooltip = this.querySelector('.time-tooltip');
+                    if (tooltip) {
+                        tooltip.style.opacity = '0';
+                        setTimeout(() => {
+                            tooltip.remove();
+                        }, 300);
+                    }
+                });
+            });
+            
+            // تأثير على القلب
+            const heart = document.querySelector('.broken-heart');
+            heart.addEventListener('click', function() {
+                this.style.transform = 'scale(1.3) rotate(10deg)';
+                this.style.color = '#ff3333';
+                
+                // إنشاء عدة دموع
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => createTear(), i * 100);
                 }
+                
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.style.color = '';
+                }, 500);
             });
         }
         
         // تهيئة الصفحة
         document.addEventListener('DOMContentLoaded', () => {
-            // تحديث الوقت أول مرة
-            updateTime();
+            // تحديث العرض أول مرة
+            updateDisplay();
             
-            // تحديث الوقت كل ثانية
-            setInterval(updateTime, 1000);
+            // تحديث كل ثانية
+            setInterval(updateDisplay, 1000);
             
-            // تغيير الرسائل كل 8 ثواني
-            setInterval(rotateMessages, 8000);
+            // تغيير الرسائل كل 10 ثواني
+            setInterval(rotateMessages, 10000);
             
-            // تأثير على الأرقام كل 5 ثواني
-            setInterval(animateNumbers, 5000);
+            // تهيئة التأثيرات التفاعلية
+            initInteractiveEffects();
             
-            // تأثير تفاعلي على القلب
-            const heart = document.querySelector('.heart');
-            heart.addEventListener('click', () => {
-                heart.style.transform = 'scale(1.2)';
-                setTimeout(() => {
-                    heart.style.transform = 'scale(1)';
-                }, 300);
+            // بدء تغيير الرسائل بعد 3 ثواني
+            setTimeout(rotateMessages, 3000);
+            
+            // ضبط الحجم للشاشات المختلفة
+            function adjustLayout() {
+                const card = document.querySelector('.card');
+                const viewportHeight = window.innerHeight;
+                const cardHeight = card.scrollHeight;
                 
-                // تغيير لون مؤقت
-                heart.style.color = '#ff3333';
-                setTimeout(() => {
-                    heart.style.color = '';
-                }, 500);
-            });
-            
-            // جعل كل المحتوى مرئيًا دائمًا
-            function adjustView() {
-                const container = document.querySelector('.container');
-                const windowHeight = window.innerHeight;
-                const containerHeight = container.scrollHeight;
-                
-                if (containerHeight > windowHeight) {
-                    // إذا كان المحتوى أطول من الشاشة، نضبط الحجم
-                    container.style.maxHeight = '90vh';
-                    container.style.overflowY = 'auto';
-                    container.style.padding = '15px';
+                if (cardHeight > viewportHeight * 0.9) {
+                    card.style.maxHeight = '90vh';
+                    card.style.overflowY = 'auto';
                 } else {
-                    // إذا كان المحتوى أقل، نمركزه
-                    container.style.maxHeight = 'none';
-                    container.style.overflowY = 'visible';
+                    card.style.maxHeight = 'none';
+                    card.style.overflowY = 'visible';
                 }
             }
             
-            // ضبط العرض عند تحميل الصفحة وعند تغيير الحجم
-            window.addEventListener('load', adjustView);
-            window.addEventListener('resize', adjustView);
+            window.addEventListener('load', adjustLayout);
+            window.addEventListener('resize', adjustLayout);
             
-            // جعل المحتوى كله مرئيًا من أول تحميل
-            setTimeout(adjustView, 100);
-        });
-        
-        // تحسين الأداء للهواتف
-        let lastUpdate = 0;
-        function throttledUpdate() {
-            const now = Date.now();
-            if (now - lastUpdate > 1000) {
-                updateTime();
-                lastUpdate = now;
+            // إنشاء بعض الدموع الأولية
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => createTear(), i * 500);
             }
-        }
-        
-        // استخدام requestAnimationFrame للأداء الأفضل
-        function smoothUpdate() {
-            requestAnimationFrame(() => {
-                updateTime();
-                setTimeout(smoothUpdate, 1000);
-            });
-        }
-        
-        // بدء التحديث السلس
-        smoothUpdate();
+        });
     </script>
 </body>
-</html>
+        </html>
