@@ -14,15 +14,17 @@
       --dark-color: #0a0a0a;
       --darker-color: #050505;
       --gray-color: #1a1a1a;
-      --text-color: #aaa;
-      --text-light: #888;
+      --text-color: #ddd;
+      --text-light: #bbb;
+      --text-lighter: #999;
       --accent-color: #8b0000;
       --accent-dark: #5a0000;
       --accent-light: #a52a2a;
       --tear-color: #4a6fa5;
       --crack-color: #333;
+      --timeline-color: #8b0000;
       --bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-      --container-bg: rgba(0, 0, 0, 0.7);
+      --container-bg: rgba(20, 20, 20, 0.85);
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
       --transition: all 0.5s ease;
       --transition-slow: all 1s ease;
@@ -63,15 +65,15 @@
         linear-gradient(45deg, transparent 49%, var(--crack-color) 49%, transparent 50%),
         linear-gradient(-45deg, transparent 49%, var(--crack-color) 49%, transparent 50%);
       background-size: 50px 50px;
-      opacity: 0.1;
+      opacity: 0.05;
       pointer-events: none;
       z-index: 100;
       animation: crackPulse 10s infinite;
     }
 
     @keyframes crackPulse {
-      0%, 100% { opacity: 0.05; }
-      50% { opacity: 0.15; }
+      0%, 100% { opacity: 0.03; }
+      50% { opacity: 0.08; }
     }
 
     /* تصميم الحاوية الرئيسية */
@@ -137,9 +139,10 @@
     h2 {
       font-size: clamp(1.4rem, 3vw, 1.8rem);
       margin: 1.5rem 0 1rem;
-      color: var(--text-light);
-      font-weight: 300;
+      color: var(--text-color);
+      font-weight: 400;
       text-align: center;
+      text-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
     }
 
     .message-container {
@@ -152,7 +155,7 @@
       border: 1px dashed rgba(139, 0, 0, 0.3);
       border-radius: 5px;
       margin: 1.5rem 0;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(30, 30, 30, 0.5);
     }
 
     #loveMessage {
@@ -166,6 +169,7 @@
       animation: fadeInUp 1s ease forwards;
       color: var(--text-light);
       font-weight: 300;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     @keyframes fadeInUp {
@@ -190,7 +194,7 @@
     }
 
     .countdown-box {
-      background: rgba(10, 10, 10, 0.8);
+      background: rgba(15, 15, 15, 0.9);
       padding: 1.5rem;
       border-radius: 8px;
       border: 1px solid rgba(139, 0, 0, 0.3);
@@ -209,7 +213,7 @@
     }
 
     .countdown-box.pain::before {
-      background: linear-gradient(90deg, #2d2d2d, #4a4a4a, #2d2d2d);
+      background: linear-gradient(90deg, #3d3d3d, #5a5a5a, #3d3d3d);
     }
 
     .countdown-title {
@@ -217,7 +221,8 @@
       color: var(--text-color);
       margin-bottom: 1rem;
       text-align: center;
-      font-weight: 300;
+      font-weight: 400;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     .countdown-timer {
@@ -229,19 +234,24 @@
       text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
       font-family: monospace;
       letter-spacing: 2px;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      border: 1px solid rgba(139, 0, 0, 0.2);
     }
 
     .countdown-timer.pain {
       color: var(--text-light);
       text-shadow: 0 0 10px rgba(100, 100, 100, 0.5);
+      border-color: rgba(100, 100, 100, 0.2);
     }
 
     .countdown-subtitle {
       font-size: 0.9rem;
-      color: var(--text-light);
+      color: var(--text-lighter);
       text-align: center;
       margin-top: 0.5rem;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     .pain-message {
@@ -249,17 +259,18 @@
       margin: 2rem auto;
       padding: 1.5rem;
       background: rgba(139, 0, 0, 0.1);
-      border-left: 3px solid var(--accent-color);
-      border-right: 3px solid var(--accent-color);
+      border: 1px solid rgba(139, 0, 0, 0.3);
       max-width: 600px;
       font-size: 1.1rem;
       line-height: 1.8;
       color: var(--text-light);
       animation: pulseText 3s infinite;
+      border-radius: 5px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     @keyframes pulseText {
-      0%, 100% { opacity: 0.8; }
+      0%, 100% { opacity: 0.9; }
       50% { opacity: 1; }
     }
 
@@ -277,7 +288,7 @@
       padding: 0.7rem 1.5rem;
       border: 1px solid rgba(139, 0, 0, 0.3);
       border-radius: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(10, 10, 10, 0.7);
       color: var(--text-light);
       font-family: 'Tajawal', sans-serif;
       cursor: pointer;
@@ -301,6 +312,7 @@
     .nav-btn:hover {
       border-color: var(--accent-color);
       color: var(--text-color);
+      background: rgba(20, 20, 20, 0.8);
     }
 
     .nav-btn:hover::before {
@@ -377,41 +389,33 @@
       }
     }
 
-    /* الخط الزمني المدمر */
+    /* الخط الزمني المدمر - تم التحسين */
+    .timeline-container {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: rgba(25, 25, 25, 0.7);
+      border-radius: 8px;
+      border: 1px solid rgba(139, 0, 0, 0.2);
+    }
+
     .timeline {
-      margin-top: 2rem;
-      padding: 1rem;
-      border-left: 2px solid var(--accent-color);
       position: relative;
+      padding: 1rem 0;
     }
 
     .timeline::before {
       content: '';
       position: absolute;
-      left: -6px;
+      right: 30px;
       top: 0;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent-color);
-      box-shadow: 0 0 10px var(--accent-color);
-    }
-
-    .timeline::after {
-      content: '';
-      position: absolute;
-      left: -6px;
       bottom: 0;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent-color);
-      box-shadow: 0 0 10px var(--accent-color);
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--timeline-color), transparent);
     }
 
     .timeline-event {
-      margin-bottom: 2rem;
-      padding-left: 1.5rem;
+      margin-bottom: 2.5rem;
+      padding-right: 60px;
       position: relative;
       transition: var(--transition);
       opacity: 0;
@@ -424,25 +428,53 @@
     }
 
     .timeline-event::before {
-      content: "💔";
+      content: '';
       position: absolute;
-      left: -1.5rem;
-      top: 0;
-      font-size: 1.2rem;
-      opacity: 0.7;
+      right: 24px;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--timeline-color);
+      border: 2px solid var(--accent-dark);
+      box-shadow: 0 0 10px var(--timeline-color);
+      z-index: 2;
+    }
+
+    .timeline-event::after {
+      content: '';
+      position: absolute;
+      right: 28px;
+      top: 9px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: white;
+      z-index: 3;
     }
 
     .timeline-event h4 {
-      margin: 0;
-      font-size: 1.1rem;
+      margin: 0 0 0.5rem 0;
+      font-size: 1.2rem;
       color: var(--text-color);
-      font-weight: 400;
+      font-weight: 500;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     .timeline-event p {
       margin: 0.5rem 0;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-light);
+      line-height: 1.6;
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+      padding: 0.5rem;
+      background: rgba(40, 40, 40, 0.3);
+      border-radius: 4px;
+      border-right: 2px solid rgba(139, 0, 0, 0.3);
+    }
+
+    .timeline-event:last-child {
+      margin-bottom: 0;
     }
 
     .broken-heart {
@@ -476,11 +508,12 @@
       text-align: center;
       margin: 3rem auto;
       padding: 2rem;
-      background: rgba(0, 0, 0, 0.5);
-      border: 1px solid rgba(139, 0, 0, 0.5);
+      background: rgba(30, 30, 30, 0.8);
+      border: 1px solid rgba(139, 0, 0, 0.4);
       max-width: 700px;
       position: relative;
       overflow: hidden;
+      border-radius: 8px;
     }
 
     .destruction-message::before {
@@ -506,11 +539,17 @@
       color: var(--text-light);
       position: relative;
       z-index: 1;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     .destruction-text strong {
       color: var(--accent-light);
       font-weight: 500;
+    }
+
+    .destruction-text em {
+      color: var(--text-lighter);
+      font-style: italic;
     }
 
     /* الصفحات */
@@ -541,27 +580,28 @@
       border-radius: 5px;
       overflow: hidden;
       position: relative;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(30, 30, 30, 0.7);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 3rem;
       border: 1px solid rgba(139, 0, 0, 0.3);
-      opacity: 0.7;
+      opacity: 0.8;
       transition: var(--transition);
     }
 
     .memory-item:hover {
-      opacity: 0.9;
+      opacity: 1;
       border-color: var(--accent-color);
       transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(139, 0, 0, 0.3);
     }
 
     /* صفحة المحادثات المتوقفة */
     .messages-section {
       margin-top: 2rem;
       padding: 1.5rem;
-      background: rgba(0, 0, 0, 0.3);
+      background: rgba(30, 30, 30, 0.5);
       border-radius: 5px;
       border: 1px solid rgba(139, 0, 0, 0.2);
     }
@@ -574,6 +614,8 @@
       border: 2px dashed rgba(139, 0, 0, 0.3);
       border-radius: 5px;
       margin-top: 2rem;
+      background: rgba(20, 20, 20, 0.5);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     }
 
     /* موسيقى حزينة */
@@ -585,7 +627,7 @@
     }
 
     .music-btn {
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(20, 20, 20, 0.8);
       border: 1px solid rgba(139, 0, 0, 0.5);
       color: var(--text-light);
       padding: 0.7rem 1.2rem;
@@ -599,6 +641,7 @@
     .music-btn:hover {
       border-color: var(--accent-color);
       color: var(--text-color);
+      background: rgba(30, 30, 30, 0.9);
     }
 
     /* تأثير الضباب */
@@ -609,11 +652,22 @@
       width: 100%;
       height: 100%;
       background: 
-        radial-gradient(circle at 20% 50%, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.8) 100%),
-        radial-gradient(circle at 80% 20%, rgba(90, 0, 0, 0.1) 0%, rgba(10, 10, 10, 0.8) 100%);
+        radial-gradient(circle at 20% 50%, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.7) 100%),
+        radial-gradient(circle at 80% 20%, rgba(90, 0, 0, 0.1) 0%, rgba(10, 10, 10, 0.7) 100%);
       pointer-events: none;
       z-index: 2;
-      opacity: 0.7;
+      opacity: 0.5;
+    }
+
+    /* تحسينات النصوص العامة */
+    .clear-text {
+      color: var(--text-color);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
+    .highlight {
+      color: var(--accent-light);
+      font-weight: 500;
     }
 
     /* التكيف مع الأجهزة */
@@ -651,6 +705,18 @@
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
       }
+
+      .timeline::before {
+        right: 20px;
+      }
+
+      .timeline-event {
+        padding-right: 50px;
+      }
+
+      .timeline-event::before {
+        right: 16px;
+      }
     }
 
     @media (max-width: 480px) {
@@ -675,6 +741,18 @@
 
       .memory-item {
         height: 100px;
+      }
+
+      .timeline::before {
+        right: 15px;
+      }
+
+      .timeline-event {
+        padding-right: 40px;
+      }
+
+      .timeline-event::before {
+        right: 11px;
       }
     }
 
@@ -738,7 +816,7 @@
       font-weight: 300;
       margin-bottom: 2rem;
       text-align: center;
-      color: var(--text-light);
+      color: var(--text-color);
       text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
       transform: scale(0.9);
       animation: pulse 3s infinite alternate;
@@ -778,8 +856,16 @@
     }
 
     @keyframes flicker {
-      0%, 100% { opacity: 0.9; }
-      50% { opacity: 0.7; }
+      0%, 100% { opacity: 0.95; }
+      50% { opacity: 0.85; }
+    }
+
+    /* تحسين الفواصل */
+    .separator {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.3), transparent);
+      margin: 2rem 0;
+      width: 100%;
     }
   </style>
 </head>
@@ -811,36 +897,36 @@
 
   <!-- الصفحة الرئيسية -->
   <div class="container page active" id="memorialPage">
-    <h1>💀 أطلال قصة حبنا 💀</h1>
+    <h1 class="clear-text">💀 أطلال قصة حبنا 💀</h1>
     
     <div class="message-container">
-      <p id="loveMessage">...هنا كان كل شيء جميلاً، والآن لم يبقَ سوى الذكريات الباهتة</p>
+      <p id="loveMessage" class="clear-text">...هنا كان كل شيء جميلاً، والآن لم يبقَ سوى الذكريات الباهتة</p>
     </div>
 
     <!-- عدادات الحب والألم -->
     <div class="countdown-section">
       <div class="countdown-box">
-        <div class="countdown-title">⏳ مدة حبنا ⏳</div>
+        <div class="countdown-title clear-text">⏳ مدة حبنا ⏳</div>
         <div class="countdown-timer" id="loveCountdown">-- يوم -- ساعة -- دقيقة</div>
         <div class="countdown-subtitle">من ٢/٣/٢٠٢٤ إلى ٢٥/١٢/٢٠٢٥</div>
       </div>
       
       <div class="countdown-box pain">
-        <div class="countdown-title">🔥 مدة الألم بعد الفراق 🔥</div>
+        <div class="countdown-title clear-text">🔥 مدة الألم بعد الفراق 🔥</div>
         <div class="countdown-timer pain" id="painCountdown">-- يوم -- ساعة -- دقيقة</div>
         <div class="countdown-subtitle">منذ ٢٥ ديسمبر ٢٠٢٥</div>
       </div>
     </div>
 
     <!-- رسالة التدمير -->
-    <div class="pain-message">
+    <div class="pain-message clear-text">
       "نعم تدمر الموقع ولكن لم يتدمر حبي لكي، سيظل مصاحب هذا الحب الكثير من الألم..."
     </div>
 
     <!-- رسالة المدمر -->
     <div class="destruction-message">
       <div class="destruction-text">
-        <strong>❌ تدمر قلب الموقع وتوقف عن العمل ❌</strong><br><br>
+        <strong class="highlight">❌ تدمر قلب الموقع وتوقف عن العمل ❌</strong><br><br>
         هذا الموقع كان يوماً يعج بالحياة والحب، أما الآن فقد أصبح نصباً تذكارياً لحب انتهى.<br>
         كل زر كان ينبض بالحياة، وكل صورة كانت تروي قصة، وكل كلمة كانت تعبر عن شعور.<br>
         والآن... الصمت هو اللغة الوحيدة، والألم هو الشعور الوحيد.<br><br>
@@ -851,48 +937,57 @@
 
   <!-- صفحة الخط الزمني -->
   <div class="container page" id="timelinePage">
-    <h1>📜 خط الزمن المدمر 📜</h1>
+    <h1 class="clear-text">📜 خط الزمن المدمر 📜</h1>
     
-    <div class="timeline">
-      <div class="timeline-event">
-        <h4>💘 البداية - ٢ مارس ٢٠٢٤</h4>
-        <p>اليوم الذي بدأنا فيه رحلة الحب... كنا نعتقد أنها لن تنتهي أبداً.</p>
+    <div class="timeline-container">
+      <div class="timeline">
+        <div class="timeline-event">
+          <h4 class="clear-text">💘 البداية - ٢ مارس ٢٠٢٤</h4>
+          <p class="clear-text">اليوم الذي بدأنا فيه رحلة الحب... كنا نعتقد أنها لن تنتهي أبداً.</p>
+        </div>
+        <div class="timeline-event">
+          <h4 class="clear-text">🌸 الربيع الأول - أبريل ٢٠٢٤</h4>
+          <p class="clear-text">أجمل أيام العمر، حين كان كل شيء يبدو ممكناً، وكان الحب يغطي كل الجروح.</p>
+        </div>
+        <div class="timeline-event">
+          <h4 class="clear-text">☀️ الصيف الحار - يوليو ٢٠٢٤</h4>
+          <p class="clear-text">ذروة الحب... كنا نظن أننا سنبقى هكذا للأبد، في عالمنا الصغير.</p>
+        </div>
+        <div class="timeline-event">
+          <h4 class="clear-text">🍂 الخريف الأول - أكتوبر ٢٠٢٤</h4>
+          <p class="clear-text">بدأت الأوراق تتساقط، وبدأت بعض الشكوك تتسلل إلى قلوبنا.</p>
+        </div>
+        <div class="timeline-event">
+          <h4 class="clear-text">❄️ الشتاء القارس - يناير ٢٠٢٥</h4>
+          <p class="clear-text">برد الفراق بدأ يشق طريقه، والصمت أصبح لغتنا المشتركة.</p>
+        </div>
+        <div class="timeline-event">
+          <h4 class="clear-text">💔 النهاية - ٢٥ ديسمبر ٢٠٢٥</h4>
+          <p class="clear-text">اليوم الذي انتهى فيه كل شيء... اليوم الذي أصبحت فيه الذكريات أشباحاً.</p>
+        </div>
       </div>
-      <div class="timeline-event">
-        <h4>🌸 الربيع الأول - أبريل ٢٠٢٤</h4>
-        <p>أجمل أيام العمر، حين كان كل شيء يبدو ممكناً، وكان الحب يغطي كل الجروح.</p>
-      </div>
-      <div class="timeline-event">
-        <h4>☀️ الصيف الحار - يوليو ٢٠٢٤</h4>
-        <p>ذروة الحب... كنا نظن أننا سنبقى هكذا للأبد، في عالمنا الصغير.</p>
-      </div>
-      <div class="timeline-event">
-        <h4>🍂 الخريف الأول - أكتوبر ٢٠٢٤</h4>
-        <p>بدأت الأوراق تتساقط، وبدأت بعض الشكوك تتسلل إلى قلوبنا.</p>
-      </div>
-      <div class="timeline-event">
-        <h4>❄️ الشتاء القارس - يناير ٢٠٢٥</h4>
-        <p>برد الفراق بدأ يشق طريقه، والصمت أصبح لغتنا المشتركة.</p>
-      </div>
-      <div class="timeline-event">
-        <h4>💔 النهاية - ٢٥ ديسمبر ٢٠٢٥</h4>
-        <p>اليوم الذي انتهى فيه كل شيء... اليوم الذي أصبحت فيه الذكريات أشباحاً.</p>
-      </div>
+    </div>
+    
+    <div class="separator"></div>
+    
+    <div class="pain-message clear-text">
+      كل حدث في هذا الخط الزمني كان حلقة في سلسلة الألم...<br>
+      الذكريات الجميلة أصبحت الآن مصدراً للألم الدائم.
     </div>
   </div>
 
   <!-- صفحة الذكريات -->
   <div class="container page" id="memoriesPage">
-    <h1>👻 أشباح الذكريات 👻</h1>
+    <h1 class="clear-text">👻 أشباح الذكريات 👻</h1>
     
-    <div class="stopped-message">
+    <div class="stopped-message clear-text">
       ⚰️ هذه الصفحة كانت تحتوي على أحلى الذكريات...<br>
       ولكن الذكريات ماتت مع موت الحب.<br>
       كل ما تبقى هو الظلال والأصداء.<br><br>
       <em>لا يمكن عرض المحتوى - الذكريات مؤلمة جداً</em>
     </div>
     
-    <h2>🖼️ معرض الأشباح</h2>
+    <h2 class="clear-text">🖼️ معرض الأشباح</h2>
     <div class="memories-gallery">
       <div class="memory-item">💔</div>
       <div class="memory-item">🥀</div>
@@ -900,6 +995,13 @@
       <div class="memory-item">🕸️</div>
       <div class="memory-item">⚰️</div>
       <div class="memory-item">🌑</div>
+    </div>
+    
+    <div class="separator"></div>
+    
+    <div class="pain-message clear-text">
+      كل رمز في هذا المعرض يمثل ذكرى ميتة...<br>
+      أشباح لماضي لن يعود أبداً.
     </div>
   </div>
 
@@ -984,6 +1086,11 @@
       
       // بدء تأثيرات عشوائية
       startRandomEffects();
+      
+      // تحريك الخط الزمني تلقائياً
+      setTimeout(() => {
+        animateTimeline();
+      }, 1000);
     }
 
     // إنشاء عناصر الحزن
@@ -1115,6 +1222,13 @@
       
       document.getElementById(pageId).classList.add('active');
       document.querySelector(`.nav-btn[onclick="showPage('${pageId}')"]`).classList.add('active');
+      
+      // إذا كانت صفحة الخط الزمني، قم بتحريكها
+      if (pageId === 'timelinePage') {
+        setTimeout(() => {
+          animateTimeline();
+        }, 300);
+      }
     }
 
     // تأثيرات عشوائية
@@ -1143,7 +1257,7 @@
       timelineEvents.forEach((event, index) => {
         setTimeout(() => {
           event.classList.add('animated');
-        }, index * 500);
+        }, index * 300);
       });
     }
 
@@ -1156,4 +1270,4 @@
     window.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
-      </html>
+  </html>
