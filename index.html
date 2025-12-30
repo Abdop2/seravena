@@ -3,28 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💔 أنقاض حبنا - موقع عبدو لمنة المدمر</title>
-  <meta name="description" content="بقايا حب دمرته الأيام... ذكريات مؤلمة من عبدو لمنة">
+  <title>💔 أطلال حبنا - عبدو ومنة</title>
+  <meta name="description" content="موقع تذكاري لحب انتهى ولكن الألم باق">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --primary-color: #2c2c2c;
-      --primary-dark: #1a1a1a;
-      --secondary-color: #4a4a4a;
-      --accent-color: #5d5d5d;
-      --accent-light: #777;
+      --dark-color: #0a0a0a;
+      --darker-color: #050505;
+      --gray-color: #1a1a1a;
       --text-color: #aaa;
-      --text-dark: #888;
+      --text-light: #888;
+      --accent-color: #8b0000;
+      --accent-dark: #5a0000;
+      --accent-light: #a52a2a;
+      --tear-color: #4a6fa5;
+      --crack-color: #333;
       --bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
-      --container-bg: rgba(20, 20, 20, 0.7);
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      --container-bg: rgba(0, 0, 0, 0.7);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
       --transition: all 0.5s ease;
-      --transition-slow: all 0.8s ease;
-      --crack-color: #444;
-      --tear-color: #3a6ea5;
+      --transition-slow: all 1s ease;
     }
 
     * {
@@ -38,7 +39,7 @@
     }
 
     body {
-      font-family: 'El Messiri', 'Tajawal', sans-serif;
+      font-family: 'Tajawal', sans-serif;
       background: var(--bg-gradient);
       color: var(--text-color);
       min-height: 100vh;
@@ -47,99 +48,33 @@
       position: relative;
       line-height: 1.6;
       background-image: 
-        radial-gradient(circle at 20% 30%, rgba(50, 50, 50, 0.1) 0%, transparent 20%),
-        radial-gradient(circle at 80% 70%, rgba(50, 50, 50, 0.1) 0%, transparent 20%);
+        radial-gradient(circle at 10% 20%, rgba(90, 0, 0, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(139, 0, 0, 0.05) 0%, transparent 20%);
     }
 
-    /* تأثيرات الدمار */
-    .crack {
+    /* تأثير الشاشة المتكسرة */
+    .crack-overlay {
       position: fixed;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
-      pointer-events: none;
-      z-index: 2;
+      width: 100%;
+      height: 100%;
       background-image: 
-        linear-gradient(45deg, transparent 48%, var(--crack-color) 49%, var(--crack-color) 51%, transparent 52%),
-        linear-gradient(-45deg, transparent 48%, var(--crack-color) 49%, var(--crack-color) 51%, transparent 52%);
-      background-size: 100px 100px;
+        linear-gradient(45deg, transparent 49%, var(--crack-color) 49%, transparent 50%),
+        linear-gradient(-45deg, transparent 49%, var(--crack-color) 49%, transparent 50%);
+      background-size: 50px 50px;
       opacity: 0.1;
-    }
-
-    .broken-hearts {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
       pointer-events: none;
-      z-index: 1;
-      opacity: 0.05;
+      z-index: 100;
+      animation: crackPulse 10s infinite;
     }
 
-    .broken-heart {
-      position: absolute;
-      font-size: 24px;
-      opacity: 0.3;
-      animation: fallBroken 15s linear infinite;
+    @keyframes crackPulse {
+      0%, 100% { opacity: 0.05; }
+      50% { opacity: 0.15; }
     }
 
-    @keyframes fallBroken {
-      0% {
-        transform: translateY(-100px) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.3;
-      }
-      90% {
-        opacity: 0.3;
-      }
-      100% {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
-
-    /* المطر الحزين */
-    .rain {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .drop {
-      position: absolute;
-      width: 1px;
-      height: 50px;
-      background: linear-gradient(to bottom, transparent, var(--tear-color), transparent);
-      animation: rainDrop 1.5s linear infinite;
-      opacity: 0.6;
-    }
-
-    @keyframes rainDrop {
-      0% {
-        transform: translateY(-100px);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.6;
-      }
-      90% {
-        opacity: 0.6;
-      }
-      100% {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
-
-    /* تحسين الحاوية الرئيسية */
+    /* تصميم الحاوية الرئيسية */
     .container {
       width: 90%;
       max-width: 800px;
@@ -152,9 +87,9 @@
       position: relative;
       z-index: 10;
       transition: var(--transition);
-      border: 1px solid rgba(100, 100, 100, 0.1);
-      border-right: 3px solid var(--crack-color);
-      border-left: 3px solid var(--crack-color);
+      border: 1px solid rgba(139, 0, 0, 0.2);
+      border-top: 3px solid var(--accent-color);
+      border-bottom: 3px solid var(--accent-color);
     }
 
     .container::before {
@@ -163,35 +98,48 @@
       top: 0;
       left: 0;
       right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    }
+
+    .container::after {
+      content: '';
+      position: absolute;
       bottom: 0;
-      background-image: 
-        linear-gradient(90deg, transparent 95%, rgba(100, 100, 100, 0.1) 100%),
-        linear-gradient(0deg, transparent 95%, rgba(100, 100, 100, 0.1) 100%);
-      pointer-events: none;
-      border-radius: 10px;
-      z-index: -1;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
     }
 
     h1 {
       font-size: clamp(1.8rem, 4vw, 2.5rem);
       margin-bottom: 1.5rem;
       color: var(--text-color);
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      text-shadow: 0 0 10px rgba(139, 0, 0, 0.3);
       font-weight: 300;
       text-align: center;
-      font-family: 'El Messiri', serif;
+      letter-spacing: 2px;
       position: relative;
-      padding-bottom: 10px;
+      padding-bottom: 1rem;
     }
 
     h1::after {
       content: '';
       position: absolute;
       bottom: 0;
-      right: 25%;
       left: 25%;
+      width: 50%;
       height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 3vw, 1.8rem);
+      margin: 1.5rem 0 1rem;
+      color: var(--text-light);
+      font-weight: 300;
+      text-align: center;
     }
 
     .message-container {
@@ -201,351 +149,378 @@
       justify-content: center;
       padding: 1rem;
       position: relative;
-      border: 1px dashed rgba(100, 100, 100, 0.3);
+      border: 1px dashed rgba(139, 0, 0, 0.3);
       border-radius: 5px;
       margin: 1.5rem 0;
-      background: rgba(10, 10, 10, 0.5);
+      background: rgba(0, 0, 0, 0.3);
     }
 
     #loveMessage {
-      font-size: clamp(1.1rem, 3vw, 1.4rem);
+      font-size: clamp(1.1rem, 2.5vw, 1.3rem);
       line-height: 1.8;
       margin: 1.5rem 0;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-      font-weight: 300;
       text-align: center;
       transition: var(--transition);
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInUp 1s ease forwards;
-      color: var(--text-dark);
-      font-family: 'Tajawal', sans-serif;
+      color: var(--text-light);
+      font-weight: 300;
     }
 
     @keyframes fadeInUp {
       to {
-        opacity: 0.9;
+        opacity: 1;
         transform: translateY(0);
       }
     }
 
-    .footer {
-      font-size: clamp(0.9rem, 2vw, 1.1rem);
-      margin-top: 1.5rem;
-      opacity: 0.6;
-      text-align: center;
-      font-style: italic;
-      color: var(--text-dark);
-    }
-
-    /* العدادات الحزينة */
-    .counters-section {
-      margin: 3rem 0;
-      padding: 2rem;
-      background: rgba(10, 10, 10, 0.7);
-      border-radius: 10px;
-      border: 1px solid rgba(100, 100, 100, 0.2);
-    }
-
-    .counter {
+    /* عدادات الحب والألم */
+    .countdown-section {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
       margin: 2rem 0;
+    }
+
+    @media (min-width: 768px) {
+      .countdown-section {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .countdown-box {
+      background: rgba(10, 10, 10, 0.8);
       padding: 1.5rem;
-      background: rgba(20, 20, 20, 0.9);
       border-radius: 8px;
-      border-right: 3px solid var(--crack-color);
-      transition: var(--transition);
-    }
-
-    .counter:hover {
-      border-right-color: var(--tear-color);
-      transform: translateX(-5px);
-    }
-
-    .counter h3 {
-      font-size: 1.3rem;
-      margin-bottom: 1rem;
-      color: var(--text-color);
-      font-weight: 400;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .counter h3::before {
-      content: '⌛';
-      font-size: 1.5rem;
-    }
-
-    .counter-value {
-      font-size: 2rem;
-      font-weight: 300;
-      text-align: center;
-      padding: 1rem;
-      margin: 1rem 0;
-      background: rgba(0, 0, 0, 0.3);
-      border-radius: 5px;
-      font-family: 'Courier New', monospace;
-      color: var(--accent-light);
-      direction: ltr;
-      overflow: hidden;
+      border: 1px solid rgba(139, 0, 0, 0.3);
       position: relative;
+      overflow: hidden;
     }
 
-    .counter-value::after {
+    .countdown-box::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-      animation: shimmer 3s infinite;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-dark), var(--accent-color), var(--accent-dark));
     }
 
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+    .countdown-box.pain::before {
+      background: linear-gradient(90deg, #2d2d2d, #4a4a4a, #2d2d2d);
     }
 
-    .counter-description {
-      font-size: 1rem;
+    .countdown-title {
+      font-size: 1.2rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
       text-align: center;
-      margin-top: 1rem;
-      padding: 1rem;
-      background: rgba(30, 30, 30, 0.5);
-      border-radius: 5px;
-      border-right: 2px solid var(--tear-color);
-      color: var(--text-dark);
-      line-height: 1.6;
+      font-weight: 300;
     }
 
-    /* رسالة الدمار الرئيسية */
+    .countdown-timer {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      text-align: center;
+      margin: 1rem 0;
+      color: var(--accent-light);
+      text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+      font-family: monospace;
+      letter-spacing: 2px;
+    }
+
+    .countdown-timer.pain {
+      color: var(--text-light);
+      text-shadow: 0 0 10px rgba(100, 100, 100, 0.5);
+    }
+
+    .countdown-subtitle {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-align: center;
+      margin-top: 0.5rem;
+      opacity: 0.7;
+    }
+
+    .pain-message {
+      text-align: center;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: rgba(139, 0, 0, 0.1);
+      border-left: 3px solid var(--accent-color);
+      border-right: 3px solid var(--accent-color);
+      max-width: 600px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text-light);
+      animation: pulseText 3s infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    /* التنقل */
+    .navigation {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .nav-btn {
+      padding: 0.7rem 1.5rem;
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      border-radius: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: var(--text-light);
+      font-family: 'Tajawal', sans-serif;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      font-weight: 300;
+    }
+
+    .nav-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .nav-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--text-color);
+    }
+
+    .nav-btn:hover::before {
+      left: 100%;
+    }
+
+    .nav-btn.active {
+      background: rgba(139, 0, 0, 0.2);
+      border-color: var(--accent-color);
+      color: var(--text-color);
+    }
+
+    /* تأثيرات الحزن */
+    .sadness-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .tear {
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      background: linear-gradient(to bottom, var(--tear-color), transparent);
+      border-radius: 0 0 10px 10px;
+      animation: fall linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(15deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(-15deg);
+        opacity: 0;
+      }
+    }
+
+    .fallen-leaf {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0.6;
+      animation: leafFall linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes leafFall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* الخط الزمني المدمر */
+    .timeline {
+      margin-top: 2rem;
+      padding: 1rem;
+      border-left: 2px solid var(--accent-color);
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-color);
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      left: -6px;
+      bottom: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent-color);
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+
+    .timeline-event {
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
+      position: relative;
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    .timeline-event.animated {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-event::before {
+      content: "💔";
+      position: absolute;
+      left: -1.5rem;
+      top: 0;
+      font-size: 1.2rem;
+      opacity: 0.7;
+    }
+
+    .timeline-event h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: var(--text-color);
+      font-weight: 400;
+    }
+
+    .timeline-event p {
+      margin: 0.5rem 0;
+      font-size: 0.95rem;
+      color: var(--text-light);
+    }
+
+    .broken-heart {
+      position: fixed;
+      font-size: 5rem;
+      opacity: 0.05;
+      z-index: 0;
+      animation: floatBroken 20s infinite linear;
+    }
+
+    @keyframes floatBroken {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      25% {
+        transform: translate(100px, 100px) rotate(90deg);
+      }
+      50% {
+        transform: translate(200px, 0) rotate(180deg);
+      }
+      75% {
+        transform: translate(100px, -100px) rotate(270deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+
+    /* رسالة التدمير */
     .destruction-message {
-      background: rgba(20, 20, 20, 0.9);
+      text-align: center;
+      margin: 3rem auto;
       padding: 2rem;
-      margin: 2rem 0;
-      border-radius: 8px;
-      border: 1px solid rgba(150, 0, 0, 0.3);
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(139, 0, 0, 0.5);
+      max-width: 700px;
       position: relative;
       overflow: hidden;
     }
 
     .destruction-message::before {
-      content: '💔';
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 3rem;
-      opacity: 0.1;
-    }
-
-    .destruction-message::after {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, rgba(150, 0, 0, 0.5), transparent);
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, transparent 48%, rgba(139, 0, 0, 0.1) 50%, transparent 52%);
+      background-size: 20px 20px;
+      animation: scan 10s linear infinite;
+    }
+
+    @keyframes scan {
+      0% { background-position: 0 0; }
+      100% { background-position: 20px 20px; }
     }
 
     .destruction-text {
       font-size: 1.2rem;
-      text-align: center;
       line-height: 1.8;
-      color: var(--text-color);
-      font-weight: 300;
+      color: var(--text-light);
       position: relative;
       z-index: 1;
     }
 
-    /* التنقل الحزين */
-    .navigation {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 2rem;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      position: relative;
-      padding: 1rem;
-      background: rgba(20, 20, 20, 0.7);
-      border-radius: 8px;
-      border-bottom: 1px solid rgba(100, 100, 100, 0.3);
-    }
-
-    .nav-btn {
-      padding: 0.7rem 1.5rem;
-      border: none;
-      border-radius: 5px;
-      background: rgba(40, 40, 40, 0.7);
-      color: var(--text-dark);
-      font-family: 'Tajawal', sans-serif;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      font-size: 0.9rem;
-      border: 1px solid rgba(100, 100, 100, 0.2);
-    }
-
-    .nav-btn.active {
-      background: rgba(60, 60, 60, 0.9);
-      border-color: var(--tear-color);
-      color: var(--text-color);
-    }
-
-    .nav-btn:hover {
-      background: rgba(70, 70, 70, 0.9);
-      transform: translateY(-2px);
-    }
-
-    /* زر الوضع الليلي معدل */
-    .mode-toggle-container {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    .toggle-night {
-      background: rgba(40, 40, 40, 0.7);
-      border: 1px solid rgba(100, 100, 100, 0.3);
-      color: var(--text-dark);
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: 'Tajawal', sans-serif;
-      font-size: 0.9rem;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    /* الذكريات الحزينة */
-    .memories-section {
-      margin-top: 2rem;
-      padding: 2rem;
-      background: rgba(20, 20, 20, 0.7);
-      border-radius: 8px;
-      border: 1px solid rgba(100, 100, 100, 0.2);
-    }
-
-    .memory-item {
-      padding: 1.5rem;
-      margin: 1rem 0;
-      background: rgba(30, 30, 30, 0.5);
-      border-radius: 5px;
-      border-right: 2px solid var(--crack-color);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .memory-item:hover {
-      border-right-color: var(--tear-color);
-      transform: translateX(-5px);
-    }
-
-    .memory-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(100, 100, 100, 0.3), transparent);
-    }
-
-    .memory-date {
-      font-size: 0.9rem;
+    .destruction-text strong {
       color: var(--accent-light);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-weight: 500;
     }
 
-    .memory-text {
-      font-size: 1.1rem;
-      color: var(--text-color);
-      line-height: 1.6;
-    }
-
-    /* تأثيرات النصوص المتقطعة */
-    .flicker {
-      animation: flicker 3s infinite;
-    }
-
-    @keyframes flicker {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
-      51% { opacity: 1; }
-      52% { opacity: 0.8; }
-      53% { opacity: 1; }
-    }
-
-    .glitch {
-      position: relative;
-      animation: glitch 5s infinite;
-    }
-
-    @keyframes glitch {
-      0% { transform: translate(0); }
-      20% { transform: translate(-1px, 1px); }
-      40% { transform: translate(-1px, -1px); }
-      60% { transform: translate(1px, 1px); }
-      80% { transform: translate(1px, -1px); }
-      100% { transform: translate(0); }
-    }
-
-    /* الظلال الطويلة */
-    .long-shadow {
-      text-shadow: 
-        1px 1px 0 rgba(0,0,0,0.5),
-        2px 2px 0 rgba(0,0,0,0.4),
-        3px 3px 0 rgba(0,0,0,0.3),
-        4px 4px 0 rgba(0,0,0,0.2),
-        5px 5px 0 rgba(0,0,0,0.1);
-    }
-
-    /* رسائل الحب الحزينة */
-    .sad-messages {
-      margin: 2rem 0;
-      padding: 1.5rem;
-      background: rgba(20, 20, 20, 0.5);
-      border-radius: 5px;
-      border: 1px dashed rgba(100, 100, 100, 0.3);
-    }
-
-    .message-btn {
-      width: 100%;
-      padding: 1rem;
-      margin: 0.5rem 0;
-      background: rgba(40, 40, 40, 0.7);
-      border: 1px solid rgba(100, 100, 100, 0.3);
-      color: var(--text-dark);
-      border-radius: 5px;
-      cursor: pointer;
-      transition: var(--transition);
-      text-align: right;
-      font-family: 'Tajawal', sans-serif;
-      font-size: 1rem;
-    }
-
-    .message-btn:hover {
-      background: rgba(60, 60, 60, 0.9);
-      border-color: var(--tear-color);
-      transform: translateX(-5px);
-    }
-
-    /* الصفحات المخفية */
+    /* الصفحات */
     .page {
       display: none;
-      animation: fadeIn 1s ease;
     }
 
     .page.active {
       display: block;
+      animation: fadeIn 0.8s ease;
     }
 
     @keyframes fadeIn {
@@ -553,523 +528,632 @@
       to { opacity: 1; }
     }
 
-    /* تأثيرات خاصة للهواتف */
+    /* صفحة الذكريات المدمرة */
+    .memories-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .memory-item {
+      height: 150px;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      border: 1px solid rgba(139, 0, 0, 0.3);
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .memory-item:hover {
+      opacity: 0.9;
+      border-color: var(--accent-color);
+      transform: scale(1.02);
+    }
+
+    /* صفحة المحادثات المتوقفة */
+    .messages-section {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      border: 1px solid rgba(139, 0, 0, 0.2);
+    }
+
+    .stopped-message {
+      text-align: center;
+      padding: 3rem;
+      color: var(--text-light);
+      font-size: 1.1rem;
+      border: 2px dashed rgba(139, 0, 0, 0.3);
+      border-radius: 5px;
+      margin-top: 2rem;
+    }
+
+    /* موسيقى حزينة */
+    .music-control {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .music-btn {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(139, 0, 0, 0.5);
+      color: var(--text-light);
+      padding: 0.7rem 1.2rem;
+      border-radius: 0;
+      cursor: pointer;
+      font-family: 'Tajawal', sans-serif;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+
+    .music-btn:hover {
+      border-color: var(--accent-color);
+      color: var(--text-color);
+    }
+
+    /* تأثير الضباب */
+    .fog-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 0.8) 100%),
+        radial-gradient(circle at 80% 20%, rgba(90, 0, 0, 0.1) 0%, rgba(10, 10, 10, 0.8) 100%);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.7;
+    }
+
+    /* التكيف مع الأجهزة */
     @media (max-width: 768px) {
       .container {
-        padding: 1rem;
+        padding: 1.2rem;
         width: 95%;
         margin: 1rem auto;
       }
 
-      .navigation {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .mode-toggle-container {
-        position: static;
-        transform: none;
-        margin-bottom: 1rem;
-      }
-
-      .toggle-night {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .counter-value {
-        font-size: 1.5rem;
-      }
-
-      .destruction-message {
-        padding: 1rem;
-      }
-    }
-
-    /* تحسينات للأجهزة الصغيرة */
-    @media (max-width: 480px) {
-      .container {
-        padding: 0.8rem;
-        width: 98%;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
-
-      .counter-value {
-        font-size: 1.2rem;
-        padding: 0.8rem;
+      .countdown-section {
+        grid-template-columns: 1fr;
       }
 
       .nav-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .memories-gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .memory-item {
+        height: 120px;
+        font-size: 2.5rem;
+      }
+
+      .music-control {
+        bottom: 10px;
+        left: 10px;
+      }
+
+      .music-btn {
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
       }
     }
 
-    /* تأثيرات اللمس الحزينة */
-    .tear-effect {
-      position: absolute;
-      font-size: 1.5rem;
-      pointer-events: none;
-      z-index: 100;
-      animation: tearFall 2s linear forwards;
-      opacity: 0.7;
+    @media (max-width: 480px) {
+      .container {
+        padding: 1rem;
+        width: 98%;
+      }
+
+      .navigation {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-btn {
+        width: 90%;
+        margin-bottom: 0.5rem;
+      }
+
+      .memories-gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .memory-item {
+        height: 100px;
+      }
     }
 
-    @keyframes tearFall {
+    /* تأثير الكتابة البطيئة */
+    .typing-animation {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--accent-color);
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--accent-color) }
+    }
+
+    /* تأثير الوهج الخافت */
+    .pulse-glow {
+      animation: pulseGlow 4s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
       0% {
-        opacity: 0.7;
-        transform: translateY(0) rotate(0deg);
+        box-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
       }
       100% {
-        opacity: 0;
-        transform: translateY(100px) rotate(20deg);
+        box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
       }
     }
 
-    /* صوت الرياح */
-    .wind-sound {
+    /* رسالة البداية */
+    .intro-overlay {
       position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: rgba(20, 20, 20, 0.8);
-      border: 1px solid rgba(100, 100, 100, 0.3);
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--dark-color);
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
-      z-index: 1000;
-      transition: var(--transition);
+      z-index: 9999;
+      transition: all 1s ease;
+      opacity: 1;
     }
 
-    .wind-sound:hover {
-      background: rgba(40, 40, 40, 0.9);
-      transform: scale(1.1);
+    .intro-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .intro-text {
+      font-size: clamp(2rem, 6vw, 3rem);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: var(--text-light);
+      text-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+      transform: scale(0.9);
+      animation: pulse 3s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .loading-bar {
+      width: 80%;
+      max-width: 300px;
+      height: 4px;
+      background: rgba(139, 0, 0, 0.3);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .loading-progress {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-dark), var(--accent-color));
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    /* تأثير الوميض الخافت */
+    .flicker {
+      animation: flicker 5s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 0.9; }
+      50% { opacity: 0.7; }
     }
   </style>
 </head>
 <body>
-  <!-- تأثيرات الدمار -->
-  <div class="crack"></div>
-  
-  <!-- المطر الحزين -->
-  <div class="rain" id="rain"></div>
-  
-  <!-- القلوب المكسورة -->
-  <div class="broken-hearts" id="brokenHearts"></div>
-  
-  <!-- صوت الرياح -->
-  <div class="wind-sound" onclick="toggleWind()" id="windSound">
-    💨
-  </div>
-
-  <!-- الشريط العلوي -->
-  <div class="navigation">
-    <div class="mode-toggle-container">
-      <button class="toggle-night" id="nightMode">
-        <span id="modeIcon">🌑</span>
-        <span id="modeText">الظلام</span>
-      </button>
+  <!-- شاشة البداية -->
+  <div class="intro-overlay" id="introOverlay">
+    <div class="intro-text" id="introText">💔 أطلال حبنا 💔</div>
+    <div class="loading-bar">
+      <div class="loading-progress" id="loadingProgress"></div>
     </div>
-    <button class="nav-btn active" onclick="showPage('painPage')">ألم الفراق 💔</button>
-    <button class="nav-btn" onclick="showPage('countersPage')">العدادات المؤلمة ⏳</button>
-    <button class="nav-btn" onclick="showPage('memoriesPage')">ذكريات دامية 🩸</button>
   </div>
 
-  <!-- صفحة الألم الرئيسية -->
-  <div class="container page active" id="painPage">
-    <h1 class="flicker">💔 أنقاض حبنا المدمر 💔</h1>
+  <!-- تأثيرات الحزن -->
+  <div class="sadness-elements" id="sadnessElements"></div>
+  <div class="crack-overlay"></div>
+  <div class="fog-overlay"></div>
+
+  <!-- التحكم بالموسيقى -->
+  <div class="music-control">
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">🎵 تشغيل الموسيقى الحزينة</button>
+  </div>
+
+  <!-- التنقل -->
+  <div class="navigation">
+    <button class="nav-btn active" onclick="showPage('memorialPage')">النصب التذكاري 💔</button>
+    <button class="nav-btn" onclick="showPage('timelinePage')">خط الزمن المدمر</button>
+    <button class="nav-btn" onclick="showPage('memoriesPage')">أشباح الذكريات</button>
+  </div>
+
+  <!-- الصفحة الرئيسية -->
+  <div class="container page active" id="memorialPage">
+    <h1>💀 أطلال قصة حبنا 💀</h1>
     
     <div class="message-container">
-      <p id="painMessage">تحميل الرسالة الحزينة...</p>
+      <p id="loveMessage">...هنا كان كل شيء جميلاً، والآن لم يبقَ سوى الذكريات الباهتة</p>
     </div>
-    
-    <div class="destruction-message glitch">
-      <p class="destruction-text">
-        "نعم تدمر الموقع ولكن لم يتدمر حبي لكي... ولكن سيظل مصاحب هذا الحب الكثير من الألم"
-      </p>
+
+    <!-- عدادات الحب والألم -->
+    <div class="countdown-section">
+      <div class="countdown-box">
+        <div class="countdown-title">⏳ مدة حبنا ⏳</div>
+        <div class="countdown-timer" id="loveCountdown">-- يوم -- ساعة -- دقيقة</div>
+        <div class="countdown-subtitle">من ٢/٣/٢٠٢٤ إلى ٢٥/١٢/٢٠٢٥</div>
+      </div>
+      
+      <div class="countdown-box pain">
+        <div class="countdown-title">🔥 مدة الألم بعد الفراق 🔥</div>
+        <div class="countdown-timer pain" id="painCountdown">-- يوم -- ساعة -- دقيقة</div>
+        <div class="countdown-subtitle">منذ ٢٥ ديسمبر ٢٠٢٥</div>
+      </div>
     </div>
-    
-    <div class="sad-messages">
-      <button class="message-btn" onclick="showSadMessage()">💧 رسالة ألم جديدة</button>
-      <button class="message-btn" onclick="toggleWind()">🌫️ صوت رياح حزينة</button>
-      <button class="message-btn" onclick="createTear()">😢 دموع</button>
+
+    <!-- رسالة التدمير -->
+    <div class="pain-message">
+      "نعم تدمر الموقع ولكن لم يتدمر حبي لكي، سيظل مصاحب هذا الحب الكثير من الألم..."
     </div>
-    
-    <div class="footer long-shadow">
-      كل زيارة للموقع... تذكرني بجرح لا يندمل 💔
+
+    <!-- رسالة المدمر -->
+    <div class="destruction-message">
+      <div class="destruction-text">
+        <strong>❌ تدمر قلب الموقع وتوقف عن العمل ❌</strong><br><br>
+        هذا الموقع كان يوماً يعج بالحياة والحب، أما الآن فقد أصبح نصباً تذكارياً لحب انتهى.<br>
+        كل زر كان ينبض بالحياة، وكل صورة كانت تروي قصة، وكل كلمة كانت تعبر عن شعور.<br>
+        والآن... الصمت هو اللغة الوحيدة، والألم هو الشعور الوحيد.<br><br>
+        <em>عبدو - ديسمبر ٢٠٢٥</em>
+      </div>
     </div>
   </div>
 
-  <!-- صفحة العدادات -->
-  <div class="container page" id="countersPage">
-    <h1>⏳ عدادات الفراق المؤلمة</h1>
+  <!-- صفحة الخط الزمني -->
+  <div class="container page" id="timelinePage">
+    <h1>📜 خط الزمن المدمر 📜</h1>
     
-    <div class="counters-section">
-      <!-- عداد الحب المتوقف -->
-      <div class="counter">
-        <h3>💔 حبنا الذي توقف</h3>
-        <div class="counter-value" id="stoppedLoveCounter">-- يوم -- ساعة -- دقيقة -- ثانية</div>
-        <div class="counter-description">
-          من ٢/٣/٢٠٢٤ إلى ٢٥/١٢/٢٠٢٥<br>
-          <span style="color: var(--tear-color); font-size: 0.9em;">توقف عن النبض...</span>
-        </div>
+    <div class="timeline">
+      <div class="timeline-event">
+        <h4>💘 البداية - ٢ مارس ٢٠٢٤</h4>
+        <p>اليوم الذي بدأنا فيه رحلة الحب... كنا نعتقد أنها لن تنتهي أبداً.</p>
       </div>
-      
-      <!-- عداد الحب المستمر -->
-      <div class="counter">
-        <h3>🖤 حبي الذي مازال يصمد</h3>
-        <div class="counter-value" id="enduringLoveCounter">-- يوم -- ساعة -- دقيقة -- ثانية</div>
-        <div class="counter-description">
-          من ٢/٣/٢٠٢٤ حتى الآن<br>
-          <span style="color: var(--tear-color); font-size: 0.9em;">رغم الألم... مازال حياً</span>
-        </div>
+      <div class="timeline-event">
+        <h4>🌸 الربيع الأول - أبريل ٢٠٢٤</h4>
+        <p>أجمل أيام العمر، حين كان كل شيء يبدو ممكناً، وكان الحب يغطي كل الجروح.</p>
       </div>
-      
-      <!-- عداد الفراق -->
-      <div class="counter">
-        <h3>🌫️ أيام الفراق</h3>
-        <div class="counter-value" id="separationCounter">-- يوم -- ساعة -- دقيقة -- ثانية</div>
-        <div class="counter-description">
-          من ٢٥/١٢/٢٠٢٥ حتى الآن<br>
-          <span style="color: var(--tear-color); font-size: 0.9em;">كل يوم يمر... جرح جديد</span>
-        </div>
+      <div class="timeline-event">
+        <h4>☀️ الصيف الحار - يوليو ٢٠٢٤</h4>
+        <p>ذروة الحب... كنا نظن أننا سنبقى هكذا للأبد، في عالمنا الصغير.</p>
       </div>
-    </div>
-    
-    <div class="destruction-message">
-      <p class="destruction-text flicker">
-        "المواقع تتدمر... والقلوب تتحطم... ولكن الذكريات تبقى كالسكين في الجرح"
-      </p>
+      <div class="timeline-event">
+        <h4>🍂 الخريف الأول - أكتوبر ٢٠٢٤</h4>
+        <p>بدأت الأوراق تتساقط، وبدأت بعض الشكوك تتسلل إلى قلوبنا.</p>
+      </div>
+      <div class="timeline-event">
+        <h4>❄️ الشتاء القارس - يناير ٢٠٢٥</h4>
+        <p>برد الفراق بدأ يشق طريقه، والصمت أصبح لغتنا المشتركة.</p>
+      </div>
+      <div class="timeline-event">
+        <h4>💔 النهاية - ٢٥ ديسمبر ٢٠٢٥</h4>
+        <p>اليوم الذي انتهى فيه كل شيء... اليوم الذي أصبحت فيه الذكريات أشباحاً.</p>
+      </div>
     </div>
   </div>
 
   <!-- صفحة الذكريات -->
   <div class="container page" id="memoriesPage">
-    <h1>🩸 ذكريات دامية</h1>
+    <h1>👻 أشباح الذكريات 👻</h1>
     
-    <div class="memories-section">
-      <div class="memory-item">
-        <div class="memory-date">📅 ٢ مارس ٢٠٢٤</div>
-        <div class="memory-text">اليوم الذي بدأنا فيه... لم أكن أعلم أن نهايته ستكون مؤلمة هكذا</div>
-      </div>
-      
-      <div class="memory-item">
-        <div class="memory-date">💔 ٢٥ ديسمبر ٢٠٢٥</div>
-        <div class="memory-text">اليوم الذي انتهى فيه كل شيء... اليوم الذي تحولت فيه الأحلام إلى كوابيس</div>
-      </div>
-      
-      <div class="memory-item">
-        <div class="memory-date">😢 أول دموع</div>
-        <div class="memory-text">عندما أدركت أن الحب الجميل يمكن أن يتحول إلى ألم لا يحتمل</div>
-      </div>
-      
-      <div class="memory-item">
-        <div class="memory-date">🌙 ليالي وحيدة</div>
-        <div class="memory-text">ليالي طويلة أمضيتها أتذكر كل لحظة... كل كلمة... كل نظرة</div>
-      </div>
-      
-      <div class="memory-item">
-        <div class="memory-date">⛈️ العاصفة</div>
-        <div class="memory-text">العاصفة التي جاءت فجأة ودمرت كل شيء... لم يبقَ سوى الأنقاض</div>
-      </div>
+    <div class="stopped-message">
+      ⚰️ هذه الصفحة كانت تحتوي على أحلى الذكريات...<br>
+      ولكن الذكريات ماتت مع موت الحب.<br>
+      كل ما تبقى هو الظلال والأصداء.<br><br>
+      <em>لا يمكن عرض المحتوى - الذكريات مؤلمة جداً</em>
     </div>
     
-    <div class="footer">
-      الذكريات مثل الشظايا... كلما حاولت نسيانها جرحتني أكثر 🩸
+    <h2>🖼️ معرض الأشباح</h2>
+    <div class="memories-gallery">
+      <div class="memory-item">💔</div>
+      <div class="memory-item">🥀</div>
+      <div class="memory-item">🌫️</div>
+      <div class="memory-item">🕸️</div>
+      <div class="memory-item">⚰️</div>
+      <div class="memory-item">🌑</div>
     </div>
   </div>
 
-  <!-- الموسيقى الحزينة -->
-  <audio loop id="windAudio" preload="auto">
-    <source src="https://assets.mixkit.co/sfx/preview/mixkit-cold-wind-1181.mp3" type="audio/mpeg">
+  <!-- الموسيقى -->
+  <audio loop id="bgMusic" preload="auto">
+    <source src="https://cdn.pixabay.com/audio/2022/11/15/audio_71e49e6c2f.mp3" type="audio/mpeg">
   </audio>
 
   <script>
-    // رسائل الحزن والألم
+    // تاريخ البداية والنهاية
+    const loveStartDate = new Date('2024-03-02');
+    const loveEndDate = new Date('2025-12-25');
+    const now = new Date();
+
+    // رسائل الحزن
     const sadMessages = [
-      "💔 قلبي تحطم... ولم يعد قادرًا على النبض بعد فراقك",
-      "🌫️ الذكريات مثل الضباب... تخنقني كلما حاولت الهروب منها",
-      "😢 الدموع لم تعد تكفي... فجرحي أعمق من أن تلمسه الدموع",
-      "⛈️ في عينيك كانت تشرق شمس حياتي... والآن الظلام يلف كل شيء",
-      "🖤 أحببتك بجنون... وعشت الألم بنفس الجنون بعد فراقك",
-      "🌙 الليالي تطول... والألم يزداد... والذكريات لا تموت",
-      "💧 كل قطرة مطر تذكرني بدموعي... وكل ريح تذكرني بآهاتي",
-      "🔥 كان حبنا نارًا دافئة... تحولت إلى رماد بارد",
-      "⏳ الوقت لا يشفي... بل يزيد الجرح عمقًا",
-      "🌑 في عينيك وجدت حياتي... وفي فراقك فقدت كل شيء",
-      "💔 الحب جميل... لكن آثاره تبقى كالندوب في القلب",
-      "😔 أبحث عنك في كل مكان... وأجد فقط ظلال ذكراك",
-      "🌪️ كنت ملاذي الآمن... وصرت عاصفتي المدمرة",
-      "🩸 القلب ينزف... والعقل يصرخ... والروح تنتحب",
-      "☔ تحت المطر... أبكي كما أبكي في داخلي... بصمت",
-      "🎭 أرتدي قناع القوة... لكن الدموع تكشف ضعفي",
-      "🌄 كل فجر يأتي... يأتي بألم جديد... وذكرى جديدة",
-      "🌌 في سماء قلبي... لم تعد توجد نجوم... فقط ظلام",
-      "💧 الدموع حبر... تكتب به قصص الألم على صفحات القلب",
-      "🖤 أحبك... وهذه الكلمة صارت أكبر عقابي"
+      "كان كل شيء جميلاً... وكان الألم أجمل، لأنه كان معك",
+      "الذكريات أصبحت أشواكاً في قلبي، كل ذكرى تدمي",
+      "كم كنت أتمنى أن يكون الوقت قد توقف عند لحظاتنا الجميلة",
+      "الحب مات... ولكن الجرح ما زال ينزف",
+      "كل شيء انتهى، ولكن الألم بقي... كذكرى خائنة",
+      "كنت أعتقد أن الحب أبدي... لكن الأبد كان قصيراً جداً",
+      "القلب المكسور لا يشفي... فقط يتعلم العيش مع الألم",
+      "لو كنت أعلم أن النهاية قريبة، لكنت احتفظت بكل لحظة ككنز",
+      "الحب الذي كان ينبض بالحياة أصبح الآن مجرد ذكرى باهتة",
+      "الأيام تمر... والألم يبقى... كظل لا يفارقني"
     ];
 
-    // تهيئة العناصر
+    // عناصر DOM
     const elements = {
-      painMessage: document.getElementById("painMessage"),
-      rain: document.getElementById("rain"),
-      brokenHearts: document.getElementById("brokenHearts"),
-      windAudio: document.getElementById("windAudio"),
-      windSound: document.getElementById("windSound"),
-      stoppedLoveCounter: document.getElementById("stoppedLoveCounter"),
-      enduringLoveCounter: document.getElementById("enduringLoveCounter"),
-      separationCounter: document.getElementById("separationCounter"),
-      nightModeBtn: document.getElementById("nightMode"),
-      modeIcon: document.getElementById("modeIcon"),
-      modeText: document.getElementById("modeText")
+      introOverlay: document.getElementById("introOverlay"),
+      introText: document.getElementById("introText"),
+      loadingProgress: document.getElementById("loadingProgress"),
+      loveMessage: document.getElementById("loveMessage"),
+      loveCountdown: document.getElementById("loveCountdown"),
+      painCountdown: document.getElementById("painCountdown"),
+      sadnessElements: document.getElementById("sadnessElements"),
+      bgMusic: document.getElementById("bgMusic"),
+      musicBtn: document.getElementById("musicBtn")
     };
 
-    // حالة التطبيق
+    // حالات التطبيق
     const state = {
-      isWindPlaying: false,
-      loveStartDate: new Date('2024-03-02'),
-      loveEndDate: new Date('2025-12-25'),
-      separationStartDate: new Date('2025-12-25'),
-      currentPage: 'painPage'
+      isMusicPlaying: false,
+      isDestroyed: true
     };
 
     // تهيئة التطبيق
     function init() {
-      createRain();
-      createBrokenHearts();
+      simulateLoading();
+    }
+
+    // تحميل البداية
+    function simulateLoading() {
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 8;
+        elements.loadingProgress.style.width = `${Math.min(progress, 100)}%`;
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            elements.introText.textContent = "💀 جرح لا يندمل 💀";
+            setTimeout(() => {
+              elements.introOverlay.classList.add("hidden");
+              startApp();
+            }, 1500);
+          }, 500);
+        }
+      }, 200);
+    }
+
+    // بدء التطبيق
+    function startApp() {
+      createSadnessElements();
+      updateMessages();
+      updateCountdowns();
       setupEventListeners();
-      showRandomSadMessage();
-      startCounters();
-      setInterval(updateCounters, 1000);
+      setInterval(updateCountdowns, 1000);
+      setInterval(updateMessages, 10000);
+      setInterval(createSadnessElements, 3000);
+      
+      // بدء تأثيرات عشوائية
+      startRandomEffects();
     }
 
-    // إنشاء المطر
-    function createRain() {
-      const rainCount = 100;
-      for (let i = 0; i < rainCount; i++) {
-        const drop = document.createElement('div');
-        drop.className = 'drop';
-        drop.style.left = `${Math.random() * 100}vw`;
-        drop.style.animationDelay = `${Math.random() * 2}s`;
-        drop.style.animationDuration = `${1 + Math.random() * 1}s`;
-        elements.rain.appendChild(drop);
+    // إنشاء عناصر الحزن
+    function createSadnessElements() {
+      const fragment = document.createDocumentFragment();
+      
+      // دموع
+      for (let i = 0; i < 5; i++) {
+        const tear = document.createElement("div");
+        tear.className = "tear";
+        tear.style.left = `${Math.random() * 100}vw`;
+        tear.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        tear.style.animationDelay = `${Math.random() * 2}s`;
+        fragment.appendChild(tear);
       }
+      
+      // أوراق متساقطة
+      for (let i = 0; i < 3; i++) {
+        const leaf = document.createElement("div");
+        leaf.className = "fallen-leaf";
+        leaf.textContent = "🥀";
+        leaf.style.left = `${Math.random() * 100}vw`;
+        leaf.style.fontSize = `${Math.random() * 20 + 15}px`;
+        leaf.style.animationDuration = `${Math.random() * 8 + 6}s`;
+        leaf.style.animationDelay = `${Math.random() * 3}s`;
+        fragment.appendChild(leaf);
+      }
+      
+      // قلوب مكسورة عائمة
+      for (let i = 0; i < 2; i++) {
+        const heart = document.createElement("div");
+        heart.className = "broken-heart";
+        heart.textContent = "💔";
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.top = `${Math.random() * 100}vh`;
+        heart.style.fontSize = `${Math.random() * 40 + 30}px`;
+        fragment.appendChild(heart);
+      }
+      
+      elements.sadnessElements.appendChild(fragment);
+      
+      // تنظيف العناصر القديمة
+      setTimeout(() => {
+        const tears = document.querySelectorAll('.tear, .fallen-leaf');
+        tears.forEach(el => {
+          if (el.parentElement) el.parentElement.removeChild(el);
+        });
+      }, 10000);
     }
 
-    // إنشاء قلوب مكسورة
-    function createBrokenHearts() {
-      const heartCount = 20;
-      for (let i = 0; i < heartCount; i++) {
-        const heart = document.createElement('div');
-        heart.className = 'broken-heart';
-        heart.textContent = '💔';
-        heart.style.left = `${Math.random() * 100}vw`;
-        heart.style.fontSize = `${Math.random() * 20 + 15}px`;
-        heart.style.animationDelay = `${Math.random() * 15}s`;
-        heart.style.animationDuration = `${10 + Math.random() * 10}s`;
-        elements.brokenHearts.appendChild(heart);
+    // تحديث الرسائل
+    function updateMessages() {
+      const message = sadMessages[Math.floor(Math.random() * sadMessages.length)];
+      elements.loveMessage.textContent = message;
+      elements.loveMessage.style.opacity = 0;
+      
+      setTimeout(() => {
+        elements.loveMessage.style.opacity = 1;
+      }, 500);
+    }
+
+    // تحديث العدادات
+    function updateCountdowns() {
+      const now = new Date();
+      
+      // عداد الحب (متوقف عند ٢٥/١٢/٢٠٢٥)
+      const loveDiff = loveEndDate - loveStartDate;
+      const loveDays = Math.floor(loveDiff / (1000 * 60 * 60 * 24));
+      const loveMonths = Math.floor(loveDays / 30);
+      const loveYears = Math.floor(loveMonths / 12);
+      const remainingMonths = loveMonths % 12;
+      const remainingDays = loveDays % 30;
+      
+      elements.loveCountdown.textContent = `${loveYears} سنة ${remainingMonths} شهر ${remainingDays} يوم`;
+      
+      // عداد الألم (يبدأ من ٢٥/١٢/٢٠٢٥)
+      let painDiff;
+      if (now > loveEndDate) {
+        painDiff = now - loveEndDate;
+      } else {
+        painDiff = 0;
+      }
+      
+      const painDays = Math.floor(painDiff / (1000 * 60 * 60 * 24));
+      const painHours = Math.floor((painDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const painMinutes = Math.floor((painDiff % (1000 * 60 * 60)) / (1000 * 60));
+      const painSeconds = Math.floor((painDiff % (1000 * 60)) / 1000);
+      
+      if (painDiff > 0) {
+        elements.painCountdown.textContent = `${painDays} يوم ${painHours} ساعة ${painMinutes} دقيقة`;
+      } else {
+        elements.painCountdown.textContent = "لم يبدأ بعد...";
       }
     }
 
     // إعداد مستمعي الأحداث
     function setupEventListeners() {
-      // تبديل الظلام
-      elements.nightModeBtn.addEventListener('click', toggleDarkness);
-      
-      // تأثيرات اللمس (دموع)
-      document.addEventListener("click", createTearOnClick);
-      
-      // تهيئة الصوت
-      elements.windAudio.volume = 0.3;
+      // لا يوجد الكثير من الأحداث في موقع مدمر
+      document.addEventListener('click', () => {
+        if (!state.isMusicPlaying) {
+          toggleMusic();
+        }
+      });
     }
 
-    // تبديل الظلام
-    function toggleDarkness() {
-      document.body.classList.toggle('darker-mode');
+    // تبديل الموسيقى
+    function toggleMusic() {
+      state.isMusicPlaying = !state.isMusicPlaying;
       
-      if (document.body.classList.contains('darker-mode')) {
-        elements.modeIcon.textContent = "☀️";
-        elements.modeText.textContent = "ضوء خافت";
-        document.body.style.filter = "brightness(0.7)";
+      if (state.isMusicPlaying) {
+        elements.bgMusic.volume = 0.3;
+        elements.bgMusic.play();
+        elements.musicBtn.textContent = "⏸️ إيقاف الموسيقى";
       } else {
-        elements.modeIcon.textContent = "🌑";
-        elements.modeText.textContent = "ظلام";
-        document.body.style.filter = "brightness(1)";
-      }
-    }
-
-    // عرض رسالة حزينة عشوائية
-    function showRandomSadMessage() {
-      const message = sadMessages[Math.floor(Math.random() * sadMessages.length)];
-      elements.painMessage.textContent = message;
-    }
-
-    // زر عرض رسالة حزينة جديدة
-    function showSadMessage() {
-      showRandomSadMessage();
-      createTear();
-    }
-
-    // تبديل صوت الرياح
-    function toggleWind() {
-      state.isWindPlaying = !state.isWindPlaying;
-      
-      if (state.isWindPlaying) {
-        elements.windAudio.play();
-        elements.windSound.innerHTML = "🌪️";
-        elements.windSound.style.borderColor = "var(--tear-color)";
-      } else {
-        elements.windAudio.pause();
-        elements.windSound.innerHTML = "💨";
-        elements.windSound.style.borderColor = "";
-      }
-    }
-
-    // إنشاء دموع
-    function createTear() {
-      const tear = document.createElement('div');
-      tear.className = 'tear-effect';
-      tear.textContent = '💧';
-      tear.style.left = `${Math.random() * 100}vw`;
-      tear.style.fontSize = `${Math.random() * 20 + 15}px`;
-      document.body.appendChild(tear);
-      
-      setTimeout(() => {
-        tear.remove();
-      }, 2000);
-    }
-
-    // دموع عند النقر
-    function createTearOnClick(e) {
-      if (Math.random() > 0.7) { // 30% فرصة لحدوث دموع عند النقر
-        const tear = document.createElement('div');
-        tear.className = 'tear-effect';
-        tear.textContent = '💧';
-        tear.style.left = `${e.clientX}px`;
-        tear.style.top = `${e.clientY}px`;
-        tear.style.fontSize = `${Math.random() * 15 + 10}px`;
-        document.body.appendChild(tear);
-        
-        setTimeout(() => {
-          tear.remove();
-        }, 2000);
+        elements.bgMusic.pause();
+        elements.musicBtn.textContent = "🎵 تشغيل الموسيقى الحزينة";
       }
     }
 
     // عرض الصفحات
     function showPage(pageId) {
-      // إخفاء جميع الصفحات
       document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
       });
       
-      // إزالة النشاط من جميع أزرار التنقل
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('active');
       });
       
-      // عرض الصفحة المطلوبة
       document.getElementById(pageId).classList.add('active');
-      
-      // تفعيل زر التنقل المناسب
       document.querySelector(`.nav-btn[onclick="showPage('${pageId}')"]`).classList.add('active');
-      
-      state.currentPage = pageId;
     }
 
-    // تشغيل العدادات
-    function startCounters() {
-      updateCounters();
+    // تأثيرات عشوائية
+    function startRandomEffects() {
+      setInterval(() => {
+        // وميض عشوائي
+        if (Math.random() > 0.7) {
+          document.body.style.filter = `brightness(${0.8 + Math.random() * 0.3})`;
+          setTimeout(() => {
+            document.body.style.filter = 'brightness(1)';
+          }, 500);
+        }
+        
+        // صوت رياح عشوائي
+        if (Math.random() > 0.9 && state.isMusicPlaying) {
+          const wind = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-cold-wind-566.mp3');
+          wind.volume = 0.2;
+          wind.play();
+        }
+      }, 3000);
     }
 
-    // تحديث العدادات
-    function updateCounters() {
-      const now = new Date();
-      
-      // 1. عداد الحب المتوقف (من ٢/٣/٢٠٢٤ إلى ٢٥/١٢/٢٠٢٥)
-      const loveDiff = state.loveEndDate - state.loveStartDate;
-      const loveDays = Math.floor(loveDiff / (1000 * 60 * 60 * 24));
-      const loveHours = Math.floor((loveDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const loveMinutes = Math.floor((loveDiff % (1000 * 60 * 60)) / (1000 * 60));
-      const loveSeconds = Math.floor((loveDiff % (1000 * 60)) / 1000);
-      
-      elements.stoppedLoveCounter.textContent = 
-        `${loveDays} يوم ${loveHours} ساعة ${loveMinutes} دقيقة ${loveSeconds} ثانية`;
-      
-      // 2. عداد الحب المستمر (من ٢/٣/٢٠٢٤ حتى الآن)
-      const enduringDiff = now - state.loveStartDate;
-      const enduringDays = Math.floor(enduringDiff / (1000 * 60 * 60 * 24));
-      const enduringHours = Math.floor((enduringDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const enduringMinutes = Math.floor((enduringDiff % (1000 * 60 * 60)) / (1000 * 60));
-      const enduringSeconds = Math.floor((enduringDiff % (1000 * 60)) / 1000);
-      
-      elements.enduringLoveCounter.textContent = 
-        `${enduringDays} يوم ${enduringHours} ساعة ${enduringMinutes} دقيقة ${enduringSeconds} ثانية`;
-      
-      // 3. عداد الفراق (من ٢٥/١٢/٢٠٢٥ حتى الآن)
-      let separationDiff;
-      if (now > state.separationStartDate) {
-        separationDiff = now - state.separationStartDate;
-      } else {
-        separationDiff = 0; // إذا لم يصل التاريخ بعد
-      }
-      
-      const separationDays = Math.floor(separationDiff / (1000 * 60 * 60 * 24));
-      const separationHours = Math.floor((separationDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const separationMinutes = Math.floor((separationDiff % (1000 * 60 * 60)) / (1000 * 60));
-      const separationSeconds = Math.floor((separationDiff % (1000 * 60)) / 1000);
-      
-      elements.separationCounter.textContent = 
-        `${separationDays} يوم ${separationHours} ساعة ${separationMinutes} دقيقة ${separationSeconds} ثانية`;
+    // تحريك الخط الزمني
+    function animateTimeline() {
+      const timelineEvents = document.querySelectorAll('.timeline-event');
+      timelineEvents.forEach((event, index) => {
+        setTimeout(() => {
+          event.classList.add('animated');
+        }, index * 500);
+      });
     }
 
-    // تعريض الدوال للاستخدام في الأحداث
+    // جعل الدوال متاحة عالمياً
     window.showPage = showPage;
-    window.showSadMessage = showSadMessage;
-    window.toggleWind = toggleWind;
-    window.createTear = createTear;
+    window.toggleMusic = toggleMusic;
+    window.animateTimeline = animateTimeline;
 
-    // بدء التطبيق عند تحميل الصفحة
+    // بدء التطبيق عند التحميل
     window.addEventListener('DOMContentLoaded', init);
   </script>
-
-  <!-- إضافة أنماط إضافية للظلام -->
-  <style>
-    .darker-mode {
-      filter: brightness(0.7);
-    }
-    
-    .darker-mode .container {
-      background: rgba(10, 10, 10, 0.8);
-    }
-    
-    .darker-mode .counter {
-      background: rgba(15, 15, 15, 0.9);
-    }
-    
-    .darker-mode .memory-item {
-      background: rgba(25, 25, 25, 0.5);
-    }
-    
-    /* إضافة المزيد من القلوب المكسورة عند التمرير */
-    .scrolled .broken-heart {
-      animation-duration: 8s;
-    }
-    
-    /* تأثيرات عند التمرير */
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 100) {
-        document.body.classList.add('scrolled');
-      } else {
-        document.body.classList.remove('scrolled');
-      }
-    });
-  </style>
 </body>
-    </html>
+      </html>
