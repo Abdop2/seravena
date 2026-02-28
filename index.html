@@ -1270,36 +1270,46 @@
     }
 
     /* تنسيق قسم الفيديو في الصفحة الجديدة */
-    .video-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    .video-item {
-      background: rgba(255,255,255,0.1);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: var(--transition);
-      border: 1px cover rgba(255,255,255,0.2);
-aspect-ratio: 9 / 15;
+  /* تحسين قسم الفيديو ليكون بتنسيق عمودي مثل تيك توك */
+.video-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
 
-    }
-    .video-item:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 20px rgba(233,30,99,0.4);
-    }
-    .video-item iframe {
-      width: 100%;
-      height: 180px;
-      border: none;
-    }
-    .video-item p {
-      padding: 0.8rem;
-      text-align: center;
-      font-size: 0.95rem;
-    }
+.video-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: 9 / 16; /* نسبة طولية مثل تيك توك */
+  max-width: 100%;
+}
+
+.video-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(233, 30, 99, 0.5);
+}
+
+.video-item iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: cover; /* لملء الإطار إذا كان الفيديو أصغر */
+}
+
+.video-item p {
+  padding: 0.8rem;
+  text-align: center;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.2);
+  margin: 0;
+}
   </style>
 </head>
 <body>
